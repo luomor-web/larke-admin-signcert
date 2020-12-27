@@ -16,13 +16,17 @@
 
 ### 截图预览
 
-![login](https://user-images.githubusercontent.com/24578855/101988572-71360b80-3cd5-11eb-9109-1e959f99663b.png)
+![Ecdsa](https://user-images.githubusercontent.com/24578855/103175887-82bc0d80-48a8-11eb-949c-bf4339cdfea4.png)
 
-![index](https://user-images.githubusercontent.com/24578855/101989891-51571580-3cde-11eb-8a6a-ec602d1eaf1c.png)
+![Eddsa](https://user-images.githubusercontent.com/24578855/103175889-851e6780-48a8-11eb-99bb-b4b822833ec7.png)
+
+![Hmac](https://user-images.githubusercontent.com/24578855/103175890-85b6fe00-48a8-11eb-8506-ce9180315155.png)
+
+![Rsa](https://user-images.githubusercontent.com/24578855/103175891-864f9480-48a8-11eb-9a63-b621e6277c51.png)
 
 
 更多截图 
-[Larke Admin 后台截图](https://github.com/deatil/larke-admin/issues/1)
+[larke-admin-signcert 截图](https://github.com/deatil/larke-admin-signcert/issues/1)
 
 
 ### 安装步骤
