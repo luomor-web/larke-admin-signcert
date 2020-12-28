@@ -5,7 +5,6 @@ namespace SignCert\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\File;
 
 use Larke\Admin\Http\Controller as BaseController;
 

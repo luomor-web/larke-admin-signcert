@@ -4,6 +4,7 @@ export default {
 
     SignCertHmac: 'Hmac加密',
     SignCertRsa: 'Rsa证书',
+    SignCertRsaPfx: 'RsaPfx证书',
     SignCertEcdsa: 'Ecdsa证书',
     SignCertEddsa: 'Eddsa证书',
   },

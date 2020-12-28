@@ -49,7 +49,7 @@
 import clipboard from '@/utils/clipboard'
 import { Base64 } from 'js-base64';
 import waves from '@/directive/waves'
-import { eddsa, getEddsaDownloadUrl } from '../../api/signCert'
+import { eddsa, getDownloadUrl } from '../../api/signCert'
 
 export default {
   name: 'ConfigIndex',
@@ -88,7 +88,7 @@ export default {
         return
       }
 
-      const url = getEddsaDownloadUrl(code)
+      const url = getDownloadUrl(code)
       window.open(url, '_blank')
     },        
     submit() {

@@ -16,6 +16,14 @@ export function rsa(data) {
   })
 }
 
+export function rsaPfx(data) {
+  return request({
+    url: '/sign-cert/rsa-pfx',
+    method: 'post',
+    data
+  })
+}
+
 export function ecdsa(data) {
   return request({
     url: '/sign-cert/ecdsa',
@@ -32,7 +40,7 @@ export function eddsa(data) {
   })
 }
 
-export function getEddsaDownloadUrl(code) {
+export function getDownloadUrl(code) {
   const baseUrl = process.env.VUE_APP_BASE_API
   if (baseUrl.substring(baseUrl.length, baseUrl.length - 1) == '/') {
     return baseUrl.substring(0, baseUrl.length - 1) + '/sign-cert/download/' + code

@@ -4,6 +4,7 @@ namespace SignCert;
 
 use Illuminate\Support\Facades\Artisan;
 
+use Larke\Admin\Facade\Extension;
 use Larke\Admin\Extension\Rule;
 use Larke\Admin\Extension\ServiceProvider as BaseServiceProvider;
 use Larke\Admin\Frontend\Support\Menu;
@@ -29,6 +30,8 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->exceptSlugs();
         
+        $this->registerNamespaces();
+        
         $this->loadRoutesFrom(__DIR__ . '/resource/route/admin.php');
     }
     
@@ -42,6 +45,16 @@ class ServiceProvider extends BaseServiceProvider
         
         config([
             'larkeadmin.auth.excepts' => $excepts,
+        ]);
+    }
+    
+    /**
+     * 注册命名空间
+     */
+    protected function registerNamespaces()
+    {
+        Extension::namespaces([
+            'phpseclib\\' => __DIR__ . '/lib/phpseclib',
         ]);
     }
     
@@ -72,35 +85,43 @@ class ServiceProvider extends BaseServiceProvider
             'description' => '用于签名所需要的证书生成',
             'children' => [
                 [
-                    'title' => 'hmac',
+                    'title' => 'hmac证书',
                     'url' => 'sign-cert/hmac',
                     'method' => 'POST',
                     'slug' => 'larke-admin.sign-cert.hmac',
-                    'description' => 'hmac签名',
+                    'description' => 'hmac证书',
                 ],
                 
                 [
-                    'title' => 'rsa',
+                    'title' => 'rsa证书',
                     'url' => 'sign-cert/rsa',
                     'method' => 'POST',
                     'slug' => 'larke-admin.sign-cert.rsa',
-                    'description' => 'rsa签名',
+                    'description' => 'rsa证书',
                 ],
                 
                 [
-                    'title' => 'ecdsa',
+                    'title' => 'rsa-pfx证书',
+                    'url' => 'sign-cert/rsa-pfx',
+                    'method' => 'POST',
+                    'slug' => 'larke-admin.sign-cert.rsa-pfx',
+                    'description' => 'rsa-pfx格式证书',
+                ],
+                
+                [
+                    'title' => 'ecdsa证书',
                     'url' => 'sign-cert/ecdsa',
                     'method' => 'POST',
                     'slug' => 'larke-admin.sign-cert.ecdsa',
-                    'description' => 'ecdsa签名',
+                    'description' => 'ecdsa证书',
                 ],
                 
                 [
-                    'title' => 'eddsa',
+                    'title' => 'eddsa证书',
                     'url' => 'sign-cert/eddsa',
                     'method' => 'POST',
                     'slug' => 'larke-admin.sign-cert.eddsa',
-                    'description' => 'rsa签名',
+                    'description' => 'rsa证书',
                 ],
             ],
         ];

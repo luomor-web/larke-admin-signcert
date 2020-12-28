@@ -2,16 +2,12 @@
   <div class="app-container">
     <el-card>
       <div slot="header" class="clearfix">
-          <span>Rsa证书</span>
+          <span>RsaPfx格式证书</span>
       </div>
 
       <div class="filter-container">
         <el-select v-model="setting.len" placeholder="秘钥长度" class="filter-item" style="width: 130px;margin-right: 10px;">
             <el-option v-for="len in lenOptions" :key="len.key" :label="len.display_name" :value="len.key" />
-        </el-select>
-        
-        <el-select v-model="setting.ktype" placeholder="秘钥格式" class="filter-item" style="width: 130px;margin-right: 10px;">
-            <el-option v-for="ktype in ktypeOptions" :key="ktype.key" :label="ktype.display_name" :value="ktype.key" />
         </el-select>
 
         <el-input v-model="setting.pass" placeholder="秘钥密码，可不填" clearable style="width: 200px;margin-right: 10px;" class="filter-item" />
@@ -22,6 +18,36 @@
       </div>
 
       <div class="sign-box">
+        <div class="sign-setting-payload">
+          <div class="sign-data-tip">
+            证书 
+            <el-tag type="success" size="mini">
+              rsa_key.cer
+            </el-tag>
+            <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.private_key, $event)">
+              复制
+            </el-button>
+          </div>
+          <div class="sign-data-input">
+            <el-input v-model.trim="response.csr_key" type="textarea" rows="8" placeholder="私钥" />
+          </div>                 
+        </div>
+
+        <div class="sign-setting-payload">
+          <div class="sign-data-tip">
+            pfx证书 
+            <el-tag type="success" size="mini">
+              rsa_key.pfx
+            </el-tag>
+            <el-button v-waves size="mini" style="margin-left:10px;" @click="handleDownload(response.pfx_key, $event)">
+                下载pfx证书
+            </el-button>   
+          </div>
+          <div class="sign-data-input">
+            <el-input v-model.trim="response.pfx_key" type="textarea" rows="3" placeholder="私钥" />
+          </div>                 
+        </div>
+
         <div class="sign-setting-payload">
           <div class="sign-data-tip">
             私钥 
@@ -60,7 +86,7 @@
 <script>
 import clipboard from '@/utils/clipboard'
 import waves from '@/directive/waves'
-import { rsa } from '../../api/signCert'
+import { rsaPfx, getDownloadUrl } from '../../api/signCert'
 
 export default {
   name: 'ConfigIndex',
@@ -77,6 +103,8 @@ export default {
         pass: '',        
       },
       response: {
+        csr_key: '',
+        pfx_key: '',
         private_key: '',
         public_key: '',
       },
@@ -86,11 +114,7 @@ export default {
         { key: '1024', display_name: '1024' },
         { key: '2048', display_name: '2048' },
         { key: '4096', display_name: '4096' },
-      ],
-      ktypeOptions: [
-        { key: 'pkcs8', display_name: 'PKCS#8' },
-        { key: 'pkcs1', display_name: 'PKCS#1' },
-      ],        
+      ],     
     }
   },
   created() {
@@ -104,17 +128,34 @@ export default {
 
         clipboard(text, event)
         this.successTip('复制成功')
-    },     
-    submit() {
-        this.response.private_key = ''
-        this.response.public_key = ''
-        
-        rsa(this.setting).then(response => {
-            this.response.private_key = response.data.private_key
-            this.response.public_key = response.data.public_key
-
-            this.successTip('创建成功')
+    },   
+    handleDownload(code) {
+      if (code == '') {
+        this.$message({
+          message: '请选择要下载的证书',
+          type: 'error',
+          duration: 3 * 1000
         })
+        return
+      }
+
+      const url = getDownloadUrl(code)
+      window.open(url, '_blank')
+    },       
+    submit() {
+      this.response.csr_key = ''
+      this.response.pfx_key = ''
+      this.response.private_key = ''
+      this.response.public_key = ''
+      
+      rsaPfx(this.setting).then(response => {
+        this.response.csr_key = response.data.csr_key
+        this.response.pfx_key = response.data.pfx_key
+        this.response.private_key = response.data.private_key
+        this.response.public_key = response.data.public_key
+
+        this.successTip('创建成功')
+      })
     }
   }
 }
