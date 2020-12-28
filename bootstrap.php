@@ -2,4 +2,4 @@
 
 use Larke\Admin\Facade\Extension;
 
-Extension::extend('SignCert', SignCert\SignCertServiceProvider::class);
+Extension::extend('SignCert', SignCert\ServiceProvider::class);

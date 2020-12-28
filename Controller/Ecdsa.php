@@ -39,18 +39,10 @@ class Ecdsa extends BaseController
             $len = '2048';
         }
         
-        $passphrase = $request->input('pass', null);
-        
-        // 配置信息
-        $dn = [
-            "countryName" => "cn",
-            "stateOrProvinceName" => "Beijing",
-            "localityName" => "Beijing",
-            "organizationName" => "LarkeAdmin",
-            "organizationalUnitName" => "LarkeAdmin",
-            "commonName" => "Larke Admin",
-            "emailAddress" => "larke-admin@admin.com"
-        ];
+        $privkeypass = $request->input('pass', null);
+
+        $privkey = ""; // 私钥
+        $pubkey = ""; // 公钥
         
         $opensslConfigPath = __DIR__ . "/../resource/ssl/openssl.cnf";
         
@@ -61,45 +53,18 @@ class Ecdsa extends BaseController
             "config" => $opensslConfigPath,
         ];
         
-        $numberofdays = 365;
-        
-        $configargs = [
-            'config' => $opensslConfigPath
-        ];
-        
         // 生成证书
-        $privkey = openssl_pkey_new($config);
-        $csr = openssl_csr_new($dn, $privkey, $configargs);
-        $sscert = openssl_csr_sign($csr, null, $privkey, $numberofdays, $configargs);
+        $res = openssl_pkey_new($config); 
+        openssl_pkey_export($res, $privkey, $privkeypass, $config);
         
-        $privkeypass = $passphrase;
+        $pubkeyDetails = openssl_pkey_get_details($res);
+        $pubkey = $pubkeyDetails["key"];
         
-        // 导出证书$csrkey
-        openssl_x509_export($sscert, $csrkey);
-        // 导出密钥$privatekey
-        openssl_pkcs12_export($sscert, $privatekey, $privkey, $privkeypass);
-        
-        // 获取私钥
-        openssl_pkcs12_read($privatekey, $certs, $privkeypass);
-        if (! empty($certs['pkey'])) {
-            $prikeyid = $certs['pkey'];
-        } else {
-            $prikeyid = '';
-        }
-        
-        // 获取公钥
-        $pub_key = openssl_pkey_get_public($csrkey);
-        $keyData = openssl_pkey_get_details($pub_key);
-        if (! empty($keyData['key'])) {
-            $public = $keyData['key'];
-        } else {
-            $public = '';
-        }
+        openssl_free_key($res);
         
         $data = [
-            'csr_key' => $csrkey,
-            'private_key' => $prikeyid,
-            'public_key' => $public,
+            'private_key' => $privkey,
+            'public_key' => $pubkey,
         ];
         
         return $this->success(__('创建成功'), $data);

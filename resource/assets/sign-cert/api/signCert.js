@@ -35,8 +35,8 @@ export function eddsa(data) {
 export function getEddsaDownloadUrl(code) {
   const baseUrl = process.env.VUE_APP_BASE_API
   if (baseUrl.substring(baseUrl.length, baseUrl.length - 1) == '/') {
-    return baseUrl.substring(0, baseUrl.length - 1) + '/sign-cert/eddsa/' + code
+    return baseUrl.substring(0, baseUrl.length - 1) + '/sign-cert/download/' + code
   } else {
-    return baseUrl + '/sign-cert/eddsa/' + code
+    return baseUrl + '/sign-cert/download/' + code
   }
 }

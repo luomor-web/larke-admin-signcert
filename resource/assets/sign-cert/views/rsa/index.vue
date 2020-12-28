@@ -1,72 +1,57 @@
 <template>
   <div class="app-container">
     <el-card>
-        <div slot="header" class="clearfix">
-            <span>Rsa证书</span>
-        </div>
+      <div slot="header" class="clearfix">
+          <span>Rsa证书</span>
+      </div>
 
-        <div class="filter-container">
-            <el-select v-model="setting.len" placeholder="秘钥长度" class="filter-item" style="width: 130px;margin-right: 10px;">
-                <el-option v-for="len in lenOptions" :key="len.key" :label="len.display_name" :value="len.key" />
-            </el-select>
-            
-            <el-select v-model="setting.ktype" placeholder="秘钥格式" class="filter-item" style="width: 130px;margin-right: 10px;">
-                <el-option v-for="ktype in ktypeOptions" :key="ktype.key" :label="ktype.display_name" :value="ktype.key" />
-            </el-select>
+      <div class="filter-container">
+        <el-select v-model="setting.len" placeholder="秘钥长度" class="filter-item" style="width: 130px;margin-right: 10px;">
+            <el-option v-for="len in lenOptions" :key="len.key" :label="len.display_name" :value="len.key" />
+        </el-select>
+        
+        <el-select v-model="setting.ktype" placeholder="秘钥格式" class="filter-item" style="width: 130px;margin-right: 10px;">
+            <el-option v-for="ktype in ktypeOptions" :key="ktype.key" :label="ktype.display_name" :value="ktype.key" />
+        </el-select>
 
-            <el-input v-model="setting.pass" placeholder="秘钥密码，可不填" clearable style="width: 200px;margin-right: 10px;" class="filter-item" />
+        <el-input v-model="setting.pass" placeholder="秘钥密码，可不填" clearable style="width: 200px;margin-right: 10px;" class="filter-item" />
 
-            <el-button v-waves class="filter-item" type="primary" @click="submit">
-              提交
+        <el-button v-waves class="filter-item" type="primary" @click="submit">
+          提交
+        </el-button>
+      </div>
+
+      <div class="sign-box">
+        <div class="sign-setting-payload">
+          <div class="sign-data-tip">
+            私钥 
+            <el-tag type="success" size="mini">
+              rsa_private_key.pem
+            </el-tag>
+            <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.private_key, $event)">
+              复制
             </el-button>
+          </div>
+          <div class="sign-data-input">
+            <el-input v-model.trim="response.private_key" type="textarea" rows="6" placeholder="私钥" />
+          </div>                 
         </div>
 
-        <div class="sign-box">
-            <div class="sign-setting-payload">
-                <div class="sign-data-tip">
-                  私钥 
-                  <el-tag type="success" size="mini">
-                    rsa_private_key.pem
-                  </el-tag>
-                  <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.private_key, $event)">
-                      复制
-                  </el-button>
-                </div>
-                <div class="sign-data-input">
-                    <el-input v-model.trim="response.private_key" type="textarea" rows="6" placeholder="私钥" />
-                </div>                 
-            </div>
-
-            <div class="sign-response-data">
-                <div class="sign-data-tip">
-                    公钥
-                    <el-tag type="success" size="mini">
-                      rsa_public_key.pem
-                    </el-tag>
-                    <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.public_key, $event)">
-                        复制
-                    </el-button>                       
-                </div>
-                <div class="sign-data-input">
-                    <el-input v-model.trim="response.public_key" type="textarea" rows="6" placeholder="公钥" />
-                </div>                
-            </div>
-
-            <div class="sign-setting-payload">
-                <div class="sign-data-tip">
-                  证书 
-                  <el-tag type="success" size="mini">
-                    rsa_csr_key.cer
-                  </el-tag>
-                  <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.csr_key, $event)">
-                    复制
-                  </el-button>                    
-                </div>
-                <div class="sign-data-input">
-                    <el-input v-model.trim="response.csr_key" type="textarea" rows="6" placeholder="证书" />
-                </div>
-            </div>            
-       </div>
+        <div class="sign-response-data">
+          <div class="sign-data-tip">
+            公钥
+            <el-tag type="success" size="mini">
+              rsa_public_key.pem
+            </el-tag>
+            <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.public_key, $event)">
+                复制
+            </el-button>                       
+          </div>
+          <div class="sign-data-input">
+            <el-input v-model.trim="response.public_key" type="textarea" rows="6" placeholder="公钥" />
+          </div>                
+        </div>       
+      </div>
 
     </el-card>
   </div>
@@ -92,7 +77,6 @@ export default {
         pass: '',        
       },
       response: {
-        csr_key: '',
         private_key: '',
         public_key: '',
       },
@@ -122,12 +106,10 @@ export default {
         this.successTip('复制成功')
     },     
     submit() {
-        this.response.csr_key = ''
         this.response.private_key = ''
         this.response.public_key = ''
         
         rsa(this.setting).then(response => {
-            this.response.csr_key = response.data.csr_key
             this.response.private_key = response.data.private_key
             this.response.public_key = response.data.public_key
 

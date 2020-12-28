@@ -1,0 +1,45 @@
+{
+    "name": "lake/larke-admin-signcert",
+    "description": "The larke-admin-signcert is a larke-admin'extension.",
+    "license": "Apache-2.0",
+    "type": "library",
+    "keywords": [
+        "lake",
+        "larke",
+        "rsa",
+        "eddsa",
+        "ecdsa",
+        "signcert",
+        "admin",
+        "larke-admin",
+        "larke-admin-signcert"
+        
+    ],
+    "homepage": "https://github.com/deatil/larke-admin-signcert",
+    "authors": [
+        {
+            "name": "deatil",
+            "email": "deatil@github.com",
+            "homepage": "https://github.com/deatil"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "lake/larke-admin":"^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SignCert\\": ""
+        },
+        "files": [
+            "bootstrap.php"
+        ]
+    },
+    "extra" : {
+        "laravel" : {
+            "providers" : [
+                "SignCert\\ServiceProvider"
+            ]
+        }
+    }
+}

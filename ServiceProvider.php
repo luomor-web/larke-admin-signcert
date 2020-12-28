@@ -5,10 +5,10 @@ namespace SignCert;
 use Illuminate\Support\Facades\Artisan;
 
 use Larke\Admin\Extension\Rule;
-use Larke\Admin\Extension\ServiceProvider;
+use Larke\Admin\Extension\ServiceProvider as BaseServiceProvider;
 use Larke\Admin\Frontend\Support\Menu;
 
-class SignCertServiceProvider extends ServiceProvider
+class ServiceProvider extends BaseServiceProvider
 {
     public $info = [
         'name' => 'SignCert',
@@ -38,7 +38,7 @@ class SignCertServiceProvider extends ServiceProvider
     protected function exceptSlugs()
     {
         $excepts = config('larkeadmin.auth.excepts', []);
-        $excepts[] = 'sign-cert.eddsa-download';
+        $excepts[] = 'sign-cert.cert-download';
         
         config([
             'larkeadmin.auth.excepts' => $excepts,

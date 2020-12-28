@@ -79,8 +79,9 @@ class Rsa extends BaseController
         $pubkey = openssl_pkey_get_details($res);
         $pubkey = $pubkey["key"];
         
+        openssl_free_key($res);
+        
         $data = [
-            'csr_key' => '',
             'private_key' => $privkey,
             'public_key' => $pubkey,
         ];
@@ -95,6 +96,53 @@ class Rsa extends BaseController
      * @return Response
      */
     protected function pkcs8(Request $request)
+    {
+        $lens = ['384', '512', '1024', '2048', '4096'];
+        $len = $request->input('len');
+        if (! in_array($len, $lens)) {
+            $len = '2048';
+        }
+        
+        $passphrase = $request->input('pass', null);
+        
+        $opensslConfigPath = __DIR__ . "/../resource/ssl/openssl.cnf";
+        
+        $config = [
+            "private_key_bits" => $len, 
+            "private_key_type" => OPENSSL_KEYTYPE_RSA, 
+            "curve_name" => "secp256k1", // secp256k1 or secp384r1
+            "config" => $opensslConfigPath,
+        ];
+        
+        $privkeypass = $passphrase; // 私钥密码
+
+        $privkey = ""; // 私钥
+        $pubkey = ""; // 公钥
+    
+        // 生成证书  
+        $res = openssl_pkey_new($config); 
+        openssl_pkey_export($res, $privkey, $privkeypass, $config);
+        
+        $pubkey = openssl_pkey_get_details($res);
+        $pubkey = $pubkey["key"];
+        
+        openssl_free_key($res);
+        
+        $data = [
+            'private_key' => $privkey,
+            'public_key' => $pubkey,
+        ];
+        
+        return $data;
+    }
+    
+    /**
+     * Rsa创建 pkcs12 格式
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    protected function pkcs12(Request $request)
     {
         $lens = ['384', '512', '1024', '2048', '4096'];
         $len = $request->input('len');
@@ -158,8 +206,11 @@ class Rsa extends BaseController
             $public = '';
         }
         
+        openssl_free_key($privkey);
+        
         $data = [
             'csr_key' => $cerKey,
+            'pfx_key' => $pfxKey,
             'private_key' => $prikeyid,
             'public_key' => $public,
         ];

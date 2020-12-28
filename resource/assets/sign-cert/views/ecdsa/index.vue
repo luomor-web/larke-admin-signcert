@@ -46,22 +46,7 @@
                 <div class="sign-data-input">
                     <el-input v-model.trim="response.public_key" type="textarea" rows="6" placeholder="公钥" />
                 </div>                
-            </div>
-
-            <div class="sign-setting-payload">
-                <div class="sign-data-tip">
-                  证书 
-                  <el-tag type="success" size="mini">
-                    ecdsa_csr_key.cer
-                  </el-tag>
-                  <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.csr_key, $event)">
-                      复制
-                  </el-button>                    
-                </div>
-                <div class="sign-data-input">
-                    <el-input v-model.trim="response.csr_key" type="textarea" rows="6" placeholder="证书" />
-                </div>                  
-            </div>            
+            </div>         
        </div>
 
     </el-card>
@@ -87,7 +72,6 @@ export default {
         pass: '',   
       },
       response: {
-          csr_key: '',
           private_key: '',
           public_key: '',
       },
@@ -114,12 +98,10 @@ export default {
         this.successTip('复制成功')
     },     
     submit() {
-        this.response.csr_key = ''
         this.response.private_key = ''
         this.response.public_key = ''
         
         ecdsa(this.setting).then(response => {
-            this.response.csr_key = response.data.csr_key
             this.response.private_key = response.data.private_key
             this.response.public_key = response.data.public_key
 
