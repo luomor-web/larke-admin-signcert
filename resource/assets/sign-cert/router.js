@@ -48,6 +48,17 @@ const route = {
         icon: 'peoples',
         roles: ['larke-admin.sign-cert.rsa-pfx']
       }
+    },  
+
+    {
+      path: '/sign-cert/rsa-pfx-pem',
+      component: () => import('./views/rsa-pfx-pem/index'),
+      name: 'SignCertRsaPfxPem',
+      meta: {
+        title: 'SignCertRsaPfxPem',
+        icon: 'peoples',
+        roles: ['larke-admin.sign-cert.rsa-pfx-pem']
+      }
     },
 
     {

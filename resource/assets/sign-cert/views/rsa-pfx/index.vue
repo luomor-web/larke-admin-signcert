@@ -13,7 +13,7 @@
         <el-input v-model="setting.pass" placeholder="秘钥密码，可不填" clearable style="width: 200px;margin-right: 10px;" class="filter-item" />
 
         <el-button v-waves class="filter-item" type="primary" @click="submit">
-          提交
+          创建证书
         </el-button>
       </div>
 
@@ -44,7 +44,7 @@
             </el-button>   
           </div>
           <div class="sign-data-input">
-            <el-input v-model.trim="response.pfx_key" type="textarea" rows="3" placeholder="私钥" />
+            <el-input v-model.trim="response.pfx_key" type="text" placeholder="私钥" />
           </div>                 
         </div>
 
@@ -99,7 +99,6 @@ export default {
     return {
       setting: {
         len: '2048',
-        ktype: 'pkcs8',
         pass: '',        
       },
       response: {

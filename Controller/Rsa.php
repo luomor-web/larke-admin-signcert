@@ -60,36 +60,18 @@ class Rsa extends BaseController
         
         $passphrase = $request->input('pass', null);
         
-        $opensslConfigPath = __DIR__ . "/../resource/ssl/openssl.cnf";
-        
-        $config = [
-            "private_key_bits" => $len, 
-            "private_key_type" => OPENSSL_KEYTYPE_RSA, 
-            "curve_name" => "secp256k1", // secp256k1 or secp384r1
-            "config" => $opensslConfigPath,
-        ];
-        
-        $privkeypass = $passphrase; // 私钥密码
-
-        $privkey = ""; // 私钥
-        $pubkey = ""; // 公钥
-    
-        // 生成证书  
-        $res = openssl_pkey_new($config); 
-        openssl_pkey_export($res, $privkey, null, $config);
-        
-        $pubkey = openssl_pkey_get_details($res);
-        $pubkey = $pubkey["key"];
-        
-        openssl_free_key($res);
-        
-        // 转换为PKCS1格式
         $rsa = new CryptRSA();
+        $keys = $rsa->createKey((int) $len);
+        
+        $privkey = $keys['privatekey']; // 私钥
+        $pubkey = $keys['publickey']; // 公钥
+        
         $rsa->loadKey($privkey);
         if (! empty($passphrase)) {
             $rsa->setPassword($passphrase);
         }
-        $newPrivkey = $rsa->getPrivateKey(CryptRSA::PUBLIC_FORMAT_PKCS1);
+        
+        $newPrivkey = $rsa->getPrivateKey(CryptRSA::PRIVATE_FORMAT_PKCS1);
         $newPubkey = $rsa->getPublicKey(CryptRSA::PUBLIC_FORMAT_PKCS1);
         
         if ($newPrivkey === false) {
@@ -123,32 +105,30 @@ class Rsa extends BaseController
         
         $passphrase = $request->input('pass', null);
         
-        $opensslConfigPath = __DIR__ . "/../resource/ssl/openssl.cnf";
+        $rsa = new CryptRSA();
+        $keys = $rsa->createKey((int) $len);
         
-        $config = [
-            "private_key_bits" => $len, 
-            "private_key_type" => OPENSSL_KEYTYPE_RSA, 
-            "curve_name" => "secp256k1", // secp256k1 or secp384r1
-            "config" => $opensslConfigPath,
-        ];
+        $privkey = $keys['privatekey']; // 私钥
+        $pubkey = $keys['publickey']; // 公钥
         
-        $privkeypass = $passphrase; // 私钥密码
-
-        $privkey = ""; // 私钥
-        $pubkey = ""; // 公钥
-    
-        // 生成证书  
-        $res = openssl_pkey_new($config); 
-        openssl_pkey_export($res, $privkey, $privkeypass, $config);
+        $rsa->loadKey($privkey);
+        if (! empty($passphrase)) {
+            $rsa->setPassword($passphrase);
+        }
         
-        $pubkey = openssl_pkey_get_details($res);
-        $pubkey = $pubkey["key"];
+        $newPrivkey = $rsa->getPrivateKey(CryptRSA::PRIVATE_FORMAT_PKCS8);
+        $newPubkey = $rsa->getPublicKey(CryptRSA::PUBLIC_FORMAT_PKCS8);
         
-        openssl_free_key($res);
+        if ($newPrivkey === false) {
+            $newPrivkey = '';
+        }
+        if ($newPubkey === false) {
+            $newPubkey = '';
+        }
         
         $data = [
-            'private_key' => $privkey,
-            'public_key' => $pubkey,
+            'private_key' => $newPrivkey,
+            'public_key' => $newPubkey,
         ];
         
         return $data;

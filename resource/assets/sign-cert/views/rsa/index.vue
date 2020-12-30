@@ -17,7 +17,7 @@
         <el-input v-model="setting.pass" placeholder="秘钥密码，可不填" clearable style="width: 200px;margin-right: 10px;" class="filter-item" />
 
         <el-button v-waves class="filter-item" type="primary" @click="submit">
-          提交
+          创建证书
         </el-button>
       </div>
 

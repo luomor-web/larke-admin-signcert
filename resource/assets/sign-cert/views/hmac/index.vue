@@ -1,41 +1,41 @@
 <template>
   <div class="app-container">
     <el-card>
-        <div slot="header" class="clearfix">
-            <span>Hmac加密</span>
+      <div slot="header" class="clearfix">
+          <span>Hmac加密</span>
+      </div>
+
+      <div class="filter-container">
+          <el-select v-model="setting.type" placeholder="类型" class="filter-item" style="width: 130px;margin-right: 10px;">
+              <el-option v-for="type in typeOptions" :key="type.key" :label="type.display_name" :value="type.key" />
+          </el-select>
+
+          <el-input v-model="setting.key" placeholder="加密秘钥" clearable style="width: 350px;margin-right: 10px;" class="filter-item" />
+
+          <el-button v-waves class="filter-item" type="primary" @click="submit">
+            提交加密
+          </el-button>
+      </div>
+
+      <div class="sign-box">
+        <div class="sign-setting-payload">
+            <div class="sign-data-tip">
+                加密内容
+            </div>
+            <div class="sign-data-input">
+                <el-input v-model.trim="setting.payload" type="textarea" rows="6" placeholder="加密内容" />
+            </div>                  
         </div>
 
-        <div class="filter-container">
-            <el-select v-model="setting.type" placeholder="类型" class="filter-item" style="width: 130px;margin-right: 10px;">
-                <el-option v-for="type in typeOptions" :key="type.key" :label="type.display_name" :value="type.key" />
-            </el-select>
-
-            <el-input v-model="setting.key" placeholder="加密秘钥" clearable style="width: 350px;margin-right: 10px;" class="filter-item" />
-
-            <el-button v-waves class="filter-item" type="primary" @click="submit">
-              提交
-            </el-button>
+        <div class="sign-response-data">
+            <div class="sign-data-tip">
+                加密结果
+            </div>
+            <div class="sign-data-input">
+                <el-input v-model.trim="response.data" type="textarea" rows="6" placeholder="加密结果" />
+            </div>                
         </div>
-
-        <div class="sign-box">
-            <div class="sign-setting-payload">
-                <div class="sign-data-tip">
-                    加密内容
-                </div>
-                <div class="sign-data-input">
-                    <el-input v-model.trim="setting.payload" type="textarea" rows="6" placeholder="加密内容" />
-                </div>                  
-            </div>
-
-            <div class="sign-response-data">
-                <div class="sign-data-tip">
-                    加密结果
-                </div>
-                <div class="sign-data-input">
-                    <el-input v-model.trim="response.data" type="textarea" rows="6" placeholder="加密结果" />
-                </div>                
-            </div>
-       </div>
+      </div>
 
     </el-card>
   </div>

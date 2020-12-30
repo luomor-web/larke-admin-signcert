@@ -14,7 +14,7 @@ class ServiceProvider extends BaseServiceProvider
     public $info = [
         'name' => 'SignCert',
         'title' => '签名证书',
-        'introduce' => '用于签名所需要的证书生成',
+        'introduce' => '生成RSA,EDDSA,ECDSA等非对称签名证书',
         'author' => 'deatil', 
         'authorsite' => 'http://github.com/deatil',
         'authoremail' => 'deatil@github.com',
@@ -22,6 +22,16 @@ class ServiceProvider extends BaseServiceProvider
         'adaptation' => '1.0.*',
         'require_extension' => [],
     ];
+    
+    protected $slug = '';
+    
+    /**
+     * 初始化
+     */
+    public function init()
+    {
+        $this->slug = md5('larke-admin.extension.sign-cert');
+    }
     
     /**
      * 运行中
@@ -81,7 +91,7 @@ class ServiceProvider extends BaseServiceProvider
             'title' => '证书签名',
             'url' => '#',
             'method' => 'OPTIONS',
-            'slug' => md5('larke-admin.sign-cert.extension'),
+            'slug' => $this->slug,
             'description' => '用于签名所需要的证书生成',
             'children' => [
                 [
@@ -106,6 +116,14 @@ class ServiceProvider extends BaseServiceProvider
                     'method' => 'POST',
                     'slug' => 'larke-admin.sign-cert.rsa-pfx',
                     'description' => 'rsa-pfx格式证书',
+                ],
+                
+                [
+                    'title' => 'pfx转pem证书',
+                    'url' => 'sign-cert/rsa-pfx-pem',
+                    'method' => 'POST',
+                    'slug' => 'larke-admin.sign-cert.rsa-pfx-pem',
+                    'description' => 'RsaPfx格式转pem格式证书',
                 ],
                 
                 [
@@ -140,13 +158,11 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function uninstall()
     {
-        $slug = md5('larke-admin.sign-cert.extension');
-        
         // 删除权限
-        Rule::delete($slug);
+        Rule::delete($this->slug);
         
         // 删除菜单
-        Menu::delete($slug);
+        Menu::delete($this->slug);
     }
     
     /**
@@ -160,13 +176,11 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function enable()
     {
-        $slug = md5('larke-admin.sign-cert.extension');
-        
         // 启用权限
-        Rule::enable($slug);
+        Rule::enable($this->slug);
         
         // 启用菜单
-        Menu::enable($slug);
+        Menu::enable($this->slug);
     }
     
     /**
@@ -174,13 +188,11 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function disable()
     {
-        $slug = md5('larke-admin.sign-cert.extension');
-        
         // 禁用权限
-        Rule::disable($slug);
+        Rule::disable($this->slug);
         
         // 禁用菜单
-        Menu::disable($slug);
+        Menu::disable($this->slug);
     }
     
 }

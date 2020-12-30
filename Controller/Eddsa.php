@@ -34,6 +34,10 @@ class Eddsa extends BaseController
      */
     public function create(Request $request)
     {
+        if (! extension_loaded('sodium')) {
+            return $this->error(__('sodium 扩展不存在'));
+        }
+        
         $signPair = sodium_crypto_sign_keypair();
         $signSecret = sodium_crypto_sign_secretkey($signPair);
         $signPublic = sodium_crypto_sign_publickey($signPair);
@@ -51,36 +55,5 @@ class Eddsa extends BaseController
         ];
         
         return $this->success(__('创建成功'), $data);
-    }
-    
-    /**
-     * 下载
-     *
-     * @title 证书下载
-     * @desc 证书下载
-     * @order 1602
-     * @auth false
-     *
-     * @param string $code
-     * @return Response
-     */
-    public function download(string $code)
-    {
-        if (empty($code)) {
-            return $this->error(__('code值不能为空'));
-        }
-        
-        $data = Cache::get($code);
-        if (empty($data)) {
-            return $this->error(__('数据不存在'));
-        }
-        
-        $headers = [
-            'Content-Type' => 'application/text',
-        ];
-        
-        return Response::streamDownload(function () use($data) {
-            echo $data;
-        }, $code, $headers);
     }
 }

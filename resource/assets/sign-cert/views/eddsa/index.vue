@@ -5,9 +5,18 @@
             <span>Eddsa证书</span>
         </div>
 
+        <el-alert
+            type="info"
+            title="使用前注意"
+            description="生成eddsa证书需要php开启 sodium 扩展"
+            style="margin-bottom:15px;"
+            show-icon
+            :closable="false"
+        />        
+
         <div class="filter-container">
             <el-button v-waves class="filter-item" type="primary" @click="submit">
-                提交创建
+                创建证书
             </el-button>
         </div>
 
@@ -22,7 +31,7 @@
                     </el-button>                    
                 </div>
                 <div class="sign-data-input">
-                    <el-input v-model.trim="response.private_key" type="textarea" rows="6" placeholder="私钥ID" />
+                    <el-input v-model.trim="response.private_key" type="text" placeholder="私钥ID" />
                 </div>                  
             </div>
 
@@ -36,7 +45,7 @@
                     </el-button>                        
                 </div>
                 <div class="sign-data-input">
-                    <el-input v-model.trim="response.public_key" type="textarea" rows="6" placeholder="公钥ID" />
+                    <el-input v-model.trim="response.public_key" type="text" placeholder="公钥ID" />
                 </div>                
             </div>
        </div>

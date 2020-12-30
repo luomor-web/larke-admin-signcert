@@ -24,6 +24,14 @@ export function rsaPfx(data) {
   })
 }
 
+export function rsaPfx2Pem(data) {
+  return request({
+    url: '/sign-cert/rsa-pfx-pem',
+    method: 'post',
+    data
+  })
+}
+
 export function ecdsa(data) {
   return request({
     url: '/sign-cert/ecdsa',
