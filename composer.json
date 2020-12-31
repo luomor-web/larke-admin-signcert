@@ -1,6 +1,6 @@
 {
-    "name": "lake/larke-admin-signcert",
-    "description": "The larke-admin-signcert is a larke-admin'extension.",
+    "name": "larke/sign-cert",
+    "description": "The sign-cert is a larke-admin'extension.",
     "license": "Apache-2.0",
     "type": "library",
     "keywords": [
@@ -9,7 +9,7 @@
         "rsa",
         "eddsa",
         "ecdsa",
-        "signcert",
+        "sign-cert",
         "admin",
         "larke-admin",
         "larke-admin-signcert"
@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SignCert\\": ""
+            "Larke\\Admin\\SignCert\\": "src"
         },
         "files": [
             "bootstrap.php"
@@ -37,7 +37,7 @@
     "extra" : {
         "laravel" : {
             "providers" : [
-                "SignCert\\ServiceProvider"
+                "Larke\\Admin\\SignCert\\ServiceProvider"
             ]
         }
     }

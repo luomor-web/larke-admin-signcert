@@ -1,6 +1,6 @@
 <?php
 
-namespace SignCert\Controller;
+namespace Larke\Admin\SignCert\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;

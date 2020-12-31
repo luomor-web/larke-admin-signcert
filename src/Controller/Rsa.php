@@ -1,6 +1,6 @@
 <?php
 
-namespace SignCert\Controller;
+namespace Larke\Admin\SignCert\Controller;
 
 use phpseclib\Crypt\RSA as CryptRSA;
 

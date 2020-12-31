@@ -1,6 +1,6 @@
 <?php
 
-namespace SignCert;
+namespace Larke\Admin\SignCert;
 
 use Illuminate\Support\Facades\Artisan;
 
@@ -52,7 +52,7 @@ class ServiceProvider extends BaseServiceProvider
         
         $this->registerNamespaces();
         
-        $this->loadRoutesFrom(__DIR__ . '/resource/route/admin.php');
+        $this->loadRoutesFrom(__DIR__ . '/../resource/route/admin.php');
     }
     
     /**
@@ -74,7 +74,7 @@ class ServiceProvider extends BaseServiceProvider
     protected function registerNamespaces()
     {
         Extension::namespaces([
-            'phpseclib\\' => __DIR__ . '/lib/phpseclib',
+            'phpseclib\\' => __DIR__ . '/../lib/phpseclib',
         ]);
     }
     
@@ -84,7 +84,7 @@ class ServiceProvider extends BaseServiceProvider
     protected function assetsPublishes()
     {
         $this->publishes([
-            __DIR__.'/resource/assets/sign-cert' => public_path('extension/sign-cert'),
+            __DIR__.'/../resource/assets/sign-cert' => public_path('extension/sign-cert'),
         ], 'larke-admin-sign-cert-assets');
         
         Artisan::call('vendor:publish', [

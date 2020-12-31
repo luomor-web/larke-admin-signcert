@@ -3,7 +3,7 @@
 use Larke\Admin\Facade\Extension;
 
 Extension::routes(function ($router) {
-    $router->namespace('\\SignCert\\Controller')->group(function ($router) {
+    $router->namespace('Larke\\Admin\\SignCert\\Controller')->group(function ($router) {
         $router->post('/sign-cert/hmac', 'Hmac@create')->name('sign-cert.hmac');
         $router->post('/sign-cert/rsa', 'Rsa@create')->name('sign-cert.rsa');
         $router->post('/sign-cert/rsa-pfx', 'RsaPfx@create')->name('sign-cert.rsa-pfx');

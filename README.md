@@ -31,23 +31,23 @@
 
 ### 安装步骤
 
-首先安装了 `larke-admin` 后台管理
+1、首先安装了 `larke-admin` 后台管理
 
-再下载扩展
+2、再下载扩展
 
 ```php
-composer require lake/larke-admin-signcert
+composer require larke/sign-cert
 ```
 
-或者本地上传，上传请将压缩包名改为 `SignCert` 
+或者本地上传，上传请将压缩包目录改为 `larke/sign-cert` 后压缩
 
-然后在 `后台->扩展` 安装本扩展
+3、然后在 `本地扩展->扩展管理` 安装本扩展
 
 安装后可以在 `public/extension/sign-cert` 发现本扩展的前端文件
 
-将 `sign-cert` 该文件夹复制到前端编译目录 `src/extension` 下进行编译预览
+4、将 `sign-cert` 该文件夹复制到前端编译目录 `src/extension` 下进行编译预览
 
-你可以在 `src/routes.js` 文件修改扩展在左侧菜单的排序
+5、你可以在 `src/routes.js` 文件修改扩展在左侧菜单的排序
 
 
 ### 开源协议
