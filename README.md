@@ -47,7 +47,7 @@ composer require lake/larke-admin-signcert
 
 将 `sign-cert` 该文件夹复制到前端编译目录 `src/extension` 下进行编译预览
 
-你可以在 `src/routes.js` 文件修改扩展在右侧菜单的排序
+你可以在 `src/routes.js` 文件修改扩展在左侧菜单的排序
 
 
 ### 开源协议
