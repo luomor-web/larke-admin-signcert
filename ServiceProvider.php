@@ -12,15 +12,25 @@ use Larke\Admin\Frontend\Support\Menu;
 class ServiceProvider extends BaseServiceProvider
 {
     public $info = [
-        'name' => 'SignCert',
         'title' => '签名证书',
-        'introduce' => '生成RSA,EDDSA,ECDSA等非对称签名证书',
-        'author' => 'deatil', 
-        'authorsite' => 'http://github.com/deatil',
-        'authoremail' => 'deatil@github.com',
-        'version' => '1.0.0',
-        'adaptation' => '1.0.*',
-        'require_extension' => [],
+        'description' => '生成RSA,EDDSA,ECDSA等非对称签名证书',
+        'keywords' => [
+            'rsa',
+            'ecdsa',
+            'eddsa',
+            'SignCert',
+        ],
+        'homepage' => 'http://github.com/deatil',
+        'authors' => [
+            [
+                'name' => 'deatil', 
+                'email' => 'deatil@github.com', 
+                'homepage' => 'http://github.com/deatil', 
+            ],
+        ],
+        'version' => '1.0.2',
+        'adaptation' => '1.1.*',
+        'require' => [],
     ];
     
     protected $slug = '';
