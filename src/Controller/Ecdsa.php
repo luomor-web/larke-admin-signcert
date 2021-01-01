@@ -44,7 +44,7 @@ class Ecdsa extends BaseController
         $privkey = ""; // 私钥
         $pubkey = ""; // 公钥
         
-        $opensslConfigPath = __DIR__ . "/../resource/ssl/openssl.cnf";
+        $opensslConfigPath = __DIR__ . "/../../resource/ssl/openssl.cnf";
         
         $config = [
             "private_key_bits" => $len, 
