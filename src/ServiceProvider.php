@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 namespace Larke\Admin\SignCert;
 
 use Illuminate\Support\Facades\Artisan;
@@ -38,7 +40,7 @@ class ServiceProvider extends BaseServiceProvider
     /**
      * 初始化
      */
-    public function init()
+    public function boot()
     {
         $this->slug = md5('larke-admin.extension.sign-cert');
     }
@@ -98,7 +100,7 @@ class ServiceProvider extends BaseServiceProvider
     public function install()
     {
         $rules = [
-            'title' => '证书签名',
+            'title' => '签名证书',
             'url' => '#',
             'method' => 'OPTIONS',
             'slug' => $this->slug,

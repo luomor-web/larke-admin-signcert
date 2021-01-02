@@ -1,6 +1,6 @@
 export default {
   route: {
-    SignCert: '证书签名',
+    SignCert: '签名证书',
 
     SignCertHmac: 'Hmac加密',
     SignCertRsa: 'Rsa证书',
