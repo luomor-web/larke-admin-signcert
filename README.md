@@ -39,9 +39,9 @@
 composer require larke/sign-cert
 ```
 
-或者本地上传，上传请将压缩包目录改为 `larke/sign-cert` 后压缩
+或者在`本地扩展->扩展管理->上传扩展` 本地上传
 
-3、然后在 `本地扩展->扩展管理` 安装本扩展
+3、然后在 `本地扩展->扩展管理->安装\更新` 安装本扩展
 
 安装后可以在 `public/extension/sign-cert` 发现本扩展的前端文件
 
