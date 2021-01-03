@@ -29,10 +29,7 @@
     "autoload": {
         "psr-4": {
             "Larke\\Admin\\SignCert\\": "src"
-        },
-        "files": [
-            "bootstrap.php"
-        ]
+        }
     },
     "extra" : {
         "laravel" : {

@@ -38,6 +38,14 @@ class ServiceProvider extends BaseServiceProvider
     protected $slug = '';
     
     /**
+     * 注册
+     */
+    public function register()
+    {
+        Extension::extend('larke/sign-cert', __CLASS__);
+    }
+    
+    /**
      * 初始化
      */
     public function boot()
