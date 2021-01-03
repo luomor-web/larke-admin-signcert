@@ -30,10 +30,10 @@
 
         <div class="sign-setting-payload">
             <div class="sign-data-tip">
-              cer证书密码
+              pfx证书密码
             </div>
             <div class="sign-data-input">
-                <el-input v-model.trim="setting.pass" type="text" placeholder="cer证书密码" />
+                <el-input v-model.trim="setting.pass" type="text" placeholder="pfx证书密码" />
             </div>                  
         </div>     
 

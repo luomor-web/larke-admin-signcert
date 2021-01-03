@@ -10,7 +10,7 @@
             <el-option v-for="len in lenOptions" :key="len.key" :label="len.display_name" :value="len.key" />
         </el-select>
 
-        <el-input v-model="setting.pass" placeholder="秘钥密码，可不填" clearable style="width: 200px;margin-right: 10px;" class="filter-item" />
+        <el-input v-model="setting.pass" placeholder="秘钥密码" clearable style="width: 200px;margin-right: 10px;" class="filter-item" />
 
         <el-button v-waves class="filter-item" type="primary" @click="submit">
           创建证书

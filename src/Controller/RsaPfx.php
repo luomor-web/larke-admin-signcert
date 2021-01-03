@@ -42,6 +42,9 @@ class RsaPfx extends BaseController
         }
         
         $passphrase = $request->input('pass', null);
+        if (empty($passphrase)) {
+            return $this->error(__('秘钥密码不能为空'));
+        }
         
         // 配置信息
         $dn = [

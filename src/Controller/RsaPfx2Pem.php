@@ -54,6 +54,9 @@ class RsaPfx2Pem extends BaseController
         }
         
         $pass = $request->input('pass', null);
+        if (empty($pass)) {
+            return $this->error(__('pfx证书密码不能为空'));
+        }
         
         // 获取私钥
         openssl_pkcs12_read($pfxKey, $certs, $pass);

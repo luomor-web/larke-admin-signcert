@@ -1,52 +1,61 @@
 <template>
   <div class="app-container">
     <el-card>
-        <div slot="header" class="clearfix">
-            <span>Ecdsa证书</span>
-        </div>
+      <div slot="header" class="clearfix">
+          <span>Ecdsa证书</span>
+      </div>
 
-        <div class="filter-container">
-            <el-select v-model="setting.len" placeholder="秘钥长度" class="filter-item" style="width: 130px;margin-right: 10px;">
-                <el-option v-for="len in lenOptions" :key="len.key" :label="len.display_name" :value="len.key" />
-            </el-select>
+      <el-alert
+          type="success"
+          title="注意事项"
+          description="生成 ecdsa 证书需要 php 开启 openssl 扩展"
+          style="margin-bottom:15px;"
+          show-icon
+          :closable="false"
+      />        
 
-            <el-input v-model="setting.pass" placeholder="秘钥密码，可不填" clearable style="width: 350px;margin-right: 10px;" class="filter-item" />
+      <div class="filter-container">
+          <el-select v-model="setting.len" placeholder="秘钥长度" class="filter-item" style="width: 130px;margin-right: 10px;">
+              <el-option v-for="len in lenOptions" :key="len.key" :label="len.display_name" :value="len.key" />
+          </el-select>
 
-            <el-button v-waves class="filter-item" type="primary" @click="submit">
-              创建证书
-            </el-button>
-        </div>
+          <el-input v-model="setting.pass" placeholder="秘钥密码，可不填" clearable style="width: 200px;margin-right: 10px;" class="filter-item" />
 
-        <div class="sign-box">
-            <div class="sign-setting-payload">
-                <div class="sign-data-tip">
-                  私钥 
-                  <el-tag type="success" size="mini">
-                    ecdsa_private_key.pem
-                  </el-tag>
-                  <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.private_key, $event)">
-                      复制
-                  </el-button>                      
-                </div>
-                <div class="sign-data-input">
-                    <el-input v-model.trim="response.private_key" type="textarea" rows="6" placeholder="私钥" />
-                </div>                  
-            </div>
+          <el-button v-waves class="filter-item" type="primary" @click="submit">
+            创建证书
+          </el-button>
+      </div>
 
-            <div class="sign-response-data">
-                <div class="sign-data-tip">
-                  公钥
-                  <el-tag type="success" size="mini">
-                    ecdsa_public_key.pem
-                  </el-tag>   
-                  <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.public_key, $event)">
-                      复制
-                  </el-button>                                       
-                </div>
-                <div class="sign-data-input">
-                    <el-input v-model.trim="response.public_key" type="textarea" rows="6" placeholder="公钥" />
-                </div>                
-            </div>         
+      <div class="sign-box">
+          <div class="sign-setting-payload">
+              <div class="sign-data-tip">
+                私钥 
+                <el-tag type="success" size="mini">
+                  ecdsa_private_key.pem
+                </el-tag>
+                <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.private_key, $event)">
+                    复制
+                </el-button>                      
+              </div>
+              <div class="sign-data-input">
+                  <el-input v-model.trim="response.private_key" type="textarea" rows="6" placeholder="私钥" />
+              </div>                  
+          </div>
+
+          <div class="sign-response-data">
+              <div class="sign-data-tip">
+                公钥
+                <el-tag type="success" size="mini">
+                  ecdsa_public_key.pem
+                </el-tag>   
+                <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.public_key, $event)">
+                    复制
+                </el-button>                                       
+              </div>
+              <div class="sign-data-input">
+                  <el-input v-model.trim="response.public_key" type="textarea" rows="6" placeholder="公钥" />
+              </div>                
+          </div>         
        </div>
 
     </el-card>

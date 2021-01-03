@@ -5,6 +5,15 @@
           <span>Rsa证书</span>
       </div>
 
+      <el-alert
+          type="success"
+          title="注意事项"
+          description="生成 rsa 证书需要 php 开启 openssl 扩展"
+          style="margin-bottom:15px;"
+          show-icon
+          :closable="false"
+      />  
+
       <div class="filter-container">
         <el-select v-model="setting.len" placeholder="秘钥长度" class="filter-item" style="width: 130px;margin-right: 10px;">
             <el-option v-for="len in lenOptions" :key="len.key" :label="len.display_name" :value="len.key" />

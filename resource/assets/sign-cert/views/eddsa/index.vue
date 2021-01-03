@@ -6,9 +6,9 @@
         </div>
 
         <el-alert
-            type="info"
-            title="使用前注意"
-            description="生成eddsa证书需要php开启 sodium 扩展"
+            type="success"
+            title="注意事项"
+            description="生成 eddsa 证书需要 php 开启 sodium 扩展"
             style="margin-bottom:15px;"
             show-icon
             :closable="false"
@@ -25,6 +25,9 @@
                 <div class="sign-data-tip">
                     <span style="margin-right: 10px;">
                         私钥
+                        <el-tag type="success" size="mini">
+                            eddsa_private_key.pem
+                        </el-tag>
                     </span>
                     <el-button v-waves size="mini" @click="handleDownload(response.private_key, $event)">
                         下载私钥
@@ -39,6 +42,9 @@
                 <div class="sign-data-tip">      
                     <span style="margin-right: 10px;">
                         公钥
+                        <el-tag type="success" size="mini">
+                            eddsa_public_key.pem
+                        </el-tag>   
                     </span>
                     <el-button v-waves size="mini" @click="handleDownload(response.public_key, $event)">
                         下载公钥
