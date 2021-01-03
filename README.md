@@ -31,9 +31,7 @@
 
 ### 安装步骤
 
-1、首先安装了 `larke-admin` 后台管理
-
-2、再下载扩展
+1、下载安装扩展
 
 ```php
 composer require larke/sign-cert
@@ -41,9 +39,9 @@ composer require larke/sign-cert
 
 或者在`本地扩展->扩展管理->上传扩展` 本地上传
 
-3、然后在 `本地扩展->扩展管理->安装\更新` 安装本扩展
+2、然后在 `本地扩展->扩展管理->安装\更新` 安装本扩展
 
-安装后可以在 `public/extension/sign-cert` 发现本扩展的前端文件
+3、安装后可以在 `public/extension/sign-cert` 发现本扩展的前端文件
 
 4、将 `sign-cert` 该文件夹复制到前端编译目录 `src/extension` 下进行编译预览
 
