@@ -12,6 +12,8 @@ const route = {
     roles: [
       'larke-admin.sign-cert.hmac',
       'larke-admin.sign-cert.rsa',
+      'larke-admin.sign-cert.rsa-pfx',
+      'larke-admin.sign-cert.rsa-pfx-pem',
       'larke-admin.sign-cert.ecdsa',
       'larke-admin.sign-cert.eddsa'
     ]

@@ -113,7 +113,7 @@ export default {
         this.$message.error('上传文件大小不能超过 1MB!');
         return false;
       }
-
+      
       this.setting.pfx = file.raw
       this.removeVisible = true
     }, 

@@ -35,6 +35,11 @@ class ServiceProvider extends BaseServiceProvider
         'require' => [],
     ];
     
+    /**
+     * 扩展图标
+     */
+    public $icon = __DIR__ . '/../logo.png';
+    
     protected $slug = '';
     
     /**
