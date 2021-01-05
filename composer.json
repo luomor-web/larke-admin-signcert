@@ -1,8 +1,6 @@
 {
     "name": "larke/sign-cert",
     "description": "The sign-cert is a larke-admin'extension.",
-    "license": "Apache-2.0",
-    "type": "library",
     "keywords": [
         "lake",
         "larke",
@@ -15,6 +13,8 @@
         "larke-admin-signcert"
     ],
     "homepage": "https://github.com/deatil/larke-admin-signcert",
+    "type": "library",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "deatil",
@@ -24,7 +24,8 @@
     ],
     "require": {
         "php": "^7.3",
-        "lake/larke-admin":"^1.0"
+        "lake/larke-admin":"^1.1",
+        "lake/larke-admin-frontend":"^1.0"
     },
     "autoload": {
         "psr-4": {
