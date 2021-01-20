@@ -12,11 +12,6 @@ use Larke\Admin\Http\Controller as BaseController;
 /**
  * Ecdsa
  *
- * @title Ecdsa证书
- * @desc Ecdsa证书配置
- * @order 150
- * @auth true
- *
  * @create 2020-12-25
  * @author deatil
  */
@@ -29,6 +24,7 @@ class Ecdsa extends BaseController
      * @desc Ecdsa证书创建
      * @order 1501
      * @auth true
+     * @parent larke-admin.extension.sign-cert
      *
      * @param  Request  $request
      * @return Response

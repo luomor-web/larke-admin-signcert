@@ -13,11 +13,6 @@ use Larke\Admin\Http\Controller as BaseController;
 /**
  * RsaPfx格式转pem格式
  *
- * @title RsaPfx格式转pem格式
- * @desc RsaPfx格式转pem格式证书
- * @order 180
- * @auth true
- *
  * @create 2020-12-20
  * @author deatil
  */
@@ -30,6 +25,7 @@ class RsaPfx2Pem extends BaseController
      * @desc RsaPfx格式转pem格式证书
      * @order 1801
      * @auth true
+     * @parent larke-admin.extension.sign-cert
      *
      * @param  Request  $request
      * @return Response

@@ -10,12 +10,7 @@ use Illuminate\Support\Facades\Cache;
 use Larke\Admin\Http\Controller as BaseController;
 
 /**
- * RsaPfx
- *
- * @title Rsa的pfx格式证书
- * @desc Rsa的pfx格式证书
- * @order 170
- * @auth true
+ * Rsa的pfx格式证书
  *
  * @create 2020-12-29
  * @author deatil
@@ -29,6 +24,7 @@ class RsaPfx extends BaseController
      * @desc Rsa的pfx创建
      * @order 1701
      * @auth true
+     * @parent larke-admin.extension.sign-cert
      *
      * @param  Request  $request
      * @return Response

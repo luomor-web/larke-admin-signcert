@@ -55,7 +55,7 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function boot()
     {
-        $this->slug = md5('larke-admin.extension.sign-cert');
+        $this->slug = 'larke-admin.extension.sign-cert';
     }
     
     /**

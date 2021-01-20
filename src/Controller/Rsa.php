@@ -11,12 +11,7 @@ use Illuminate\Http\Request;
 use Larke\Admin\Http\Controller as BaseController;
 
 /**
- * Rsa
- *
- * @title Rsa证书
- * @desc Rsa证书配置
- * @order 130
- * @auth true
+ * Rsa证书
  *
  * @create 2020-12-25
  * @author deatil
@@ -30,6 +25,7 @@ class Rsa extends BaseController
      * @desc Rsa证书创建
      * @order 1301
      * @auth true
+     * @parent larke-admin.extension.sign-cert
      *
      * @param  Request  $request
      * @return Response

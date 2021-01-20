@@ -9,12 +9,7 @@ use Illuminate\Http\Request;
 use Larke\Admin\Http\Controller as BaseController;
 
 /**
- * Hmac
- *
- * @title Hmac证书
- * @desc Hmac证书配置
- * @order 120
- * @auth true
+ * Hmac证书
  *
  * @create 2020-12-25
  * @author deatil
@@ -28,6 +23,7 @@ class Hmac extends BaseController
      * @desc Hmac证书创建
      * @order 1201
      * @auth true
+     * @parent larke-admin.extension.sign-cert
      *
      * @param  Request  $request
      * @return Response
