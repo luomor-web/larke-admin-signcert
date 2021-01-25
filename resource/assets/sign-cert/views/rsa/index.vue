@@ -97,8 +97,8 @@ export default {
         { key: '4096', display_name: '4096' },
       ],
       ktypeOptions: [
-        { key: 'pkcs8', display_name: 'PKCS#8' },
         { key: 'pkcs1', display_name: 'PKCS#1' },
+        { key: 'pkcs8', display_name: 'PKCS#8' },
       ],        
     }
   },
