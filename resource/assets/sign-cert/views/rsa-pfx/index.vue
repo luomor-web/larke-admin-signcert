@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-card>
       <div slot="header" class="clearfix">
-          <span>RsaPfx格式证书</span>
+          <span>RsaPfx证书</span>
       </div>
 
       <div class="filter-container">
