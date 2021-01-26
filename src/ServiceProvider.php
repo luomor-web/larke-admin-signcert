@@ -22,15 +22,15 @@ class ServiceProvider extends BaseServiceProvider
             'eddsa',
             'SignCert',
         ],
-        'homepage' => 'http://github.com/deatil',
+        'homepage' => 'https://github.com/deatil/larke-admin-signcert',
         'authors' => [
             [
                 'name' => 'deatil', 
                 'email' => 'deatil@github.com', 
-                'homepage' => 'http://github.com/deatil', 
+                'homepage' => 'https://github.com/deatil', 
             ],
         ],
-        'version' => '1.0.3',
+        'version' => '1.0.5',
         'adaptation' => '1.1.*',
         'require' => [],
     ];
@@ -38,7 +38,7 @@ class ServiceProvider extends BaseServiceProvider
     /**
      * 扩展图标
      */
-    public $icon = __DIR__ . '/../logo.png';
+    public $icon = __DIR__ . '/../icon.png';
     
     protected $slug = '';
     
@@ -71,7 +71,7 @@ class ServiceProvider extends BaseServiceProvider
     protected function exceptSlugs()
     {
         $excepts = config('larkeadmin.auth.excepts', []);
-        $excepts[] = 'sign-cert.cert-download';
+        $excepts[] = 'larke-admin.sign-cert.cert-download';
         
         config([
             'larkeadmin.auth.excepts' => $excepts,
