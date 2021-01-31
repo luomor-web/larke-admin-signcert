@@ -70,11 +70,15 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function exceptSlugs()
     {
-        $excepts = config('larkeadmin.auth.excepts', []);
-        $excepts[] = 'larke-admin.sign-cert.cert-download';
+        $authenticateExcepts = config('larkeadmin.auth.authenticate_excepts', []);
+        $authenticateExcepts[] = 'larke-admin.sign-cert.cert-download';
+        
+        $permissionExcepts = config('larkeadmin.auth.permission_excepts', []);
+        $permissionExcepts[] = 'larke-admin.sign-cert.cert-download';
         
         config([
-            'larkeadmin.auth.excepts' => $excepts,
+            'larkeadmin.auth.authenticate_excepts' => $authenticateExcepts,
+            'larkeadmin.auth.permission_excepts' => $permissionExcepts,
         ]);
     }
     
@@ -83,9 +87,11 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function registerNamespaces()
     {
-        Extension::namespaces([
-            'phpseclib\\' => __DIR__ . '/../lib/phpseclib',
-        ]);
+        if (! class_exists('phpseclib\\Crypt\\RSA')) {
+            Extension::namespaces([
+                'phpseclib\\' => __DIR__ . '/../lib/phpseclib',
+            ]);
+        }
     }
     
     /**
