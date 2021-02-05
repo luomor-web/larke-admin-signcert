@@ -14,6 +14,7 @@ use Larke\Admin\Frontend\Support\Menu;
 class ServiceProvider extends BaseServiceProvider
 {
     public $info = [
+        'name' => 'larke/sign-cert',
         'title' => '签名证书',
         'description' => '生成RSA,EDDSA,ECDSA等非对称签名证书',
         'keywords' => [
@@ -48,7 +49,7 @@ class ServiceProvider extends BaseServiceProvider
     public function boot()
     {
         // 扩展注册
-        Extension::extend('larke/sign-cert', __CLASS__);
+        Extension::extend($this->info['name'], __CLASS__);
         
         $this->slug = 'larke-admin.extension.sign-cert';
     }
