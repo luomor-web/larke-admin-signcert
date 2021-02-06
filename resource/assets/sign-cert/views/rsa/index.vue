@@ -6,7 +6,7 @@
       </div>
 
       <el-alert
-          type="success"
+          type="warning"
           title="注意事项"
           description="生成 rsa 证书需要 php 开启 openssl 扩展"
           style="margin-bottom:15px;"
