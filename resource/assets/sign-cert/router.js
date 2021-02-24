@@ -25,7 +25,7 @@ const route = {
       name: 'SignCertHmac',
       meta: {
         title: 'SignCertHmac',
-        icon: 'peoples',
+        icon: 'el-icon-document',
         roles: ['larke-admin.sign-cert.hmac']
       }
     },
@@ -36,7 +36,7 @@ const route = {
       name: 'SignCertRsa',
       meta: {
         title: 'SignCertRsa',
-        icon: 'peoples',
+        icon: 'el-icon-tickets',
         roles: ['larke-admin.sign-cert.rsa']
       }
     },
@@ -47,7 +47,7 @@ const route = {
       name: 'SignCertRsaPfx',
       meta: {
         title: 'SignCertRsaPfx',
-        icon: 'peoples',
+        icon: 'el-icon-tickets',
         roles: ['larke-admin.sign-cert.rsa-pfx']
       }
     },  
@@ -58,7 +58,7 @@ const route = {
       name: 'SignCertRsaPfxPem',
       meta: {
         title: 'SignCertRsaPfxPem',
-        icon: 'peoples',
+        icon: 'el-icon-tickets',
         roles: ['larke-admin.sign-cert.rsa-pfx-pem']
       }
     },
@@ -69,7 +69,7 @@ const route = {
       name: 'SignCertEcdsa',
       meta: {
         title: 'SignCertEcdsa',
-        icon: 'peoples',
+        icon: 'el-icon-tickets',
         roles: ['larke-admin.sign-cert.ecdsa']
       }
     },  
@@ -80,7 +80,7 @@ const route = {
       name: 'SignCertEddsa',
       meta: {
         title: 'SignCertEddsa',
-        icon: 'peoples',
+        icon: 'el-icon-tickets',
         roles: ['larke-admin.sign-cert.eddsa']
       }
     },  
