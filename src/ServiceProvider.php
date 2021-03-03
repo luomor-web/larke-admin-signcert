@@ -31,7 +31,7 @@ class ServiceProvider extends BaseServiceProvider
                 'homepage' => 'https://github.com/deatil', 
             ],
         ],
-        'version' => '1.0.5',
+        'version' => '1.0.6',
         'adaptation' => '1.1.*',
         'require' => [],
     ];
@@ -63,7 +63,7 @@ class ServiceProvider extends BaseServiceProvider
         
         $this->registerNamespaces();
         
-        $this->loadRoutesFrom(__DIR__ . '/../resource/route/admin.php');
+        $this->loadRoutesFrom(__DIR__ . '/../resources/route/admin.php');
     }
     
     /**
@@ -71,16 +71,8 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function exceptSlugs()
     {
-        $authenticateExcepts = config('larkeadmin.auth.authenticate_excepts', []);
-        $authenticateExcepts[] = 'larke-admin.sign-cert.cert-download';
-        
-        $permissionExcepts = config('larkeadmin.auth.permission_excepts', []);
-        $permissionExcepts[] = 'larke-admin.sign-cert.cert-download';
-        
-        config([
-            'larkeadmin.auth.authenticate_excepts' => $authenticateExcepts,
-            'larkeadmin.auth.permission_excepts' => $permissionExcepts,
-        ]);
+        larke_admin_authenticate_excepts(['larke-admin.sign-cert.cert-download']);
+        larke_admin_permission_excepts(['larke-admin.sign-cert.cert-download']);
     }
     
     /**
@@ -101,7 +93,7 @@ class ServiceProvider extends BaseServiceProvider
     protected function assetsPublishes()
     {
         $this->publishes([
-            __DIR__.'/../resource/assets/sign-cert' => public_path('extension/sign-cert'),
+            __DIR__.'/../resources/assets/sign-cert' => public_path('extension/sign-cert'),
         ], 'larke-admin-sign-cert-assets');
         
         Artisan::call('vendor:publish', [

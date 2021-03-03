@@ -53,7 +53,7 @@ class RsaPfx extends BaseController
             "emailAddress" => "larke-admin@admin.com"
         ];
         
-        $opensslConfigPath = __DIR__ . "/../../resource/ssl/openssl.cnf";
+        $opensslConfigPath = __DIR__ . "/../../resources/ssl/openssl.cnf";
         
         $config = [
             "private_key_bits" => $len, 

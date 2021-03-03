@@ -8,7 +8,7 @@ const route = {
   name: 'SignCert',
   meta: {
     title: 'SignCert',
-    icon: 'el-icon-s-management',
+    icon: 'el-icon-s-claim',
     roles: [
       'larke-admin.sign-cert.hmac',
       'larke-admin.sign-cert.rsa',
