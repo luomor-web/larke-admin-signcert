@@ -29,7 +29,7 @@
             </el-button>
           </div>
           <div class="sign-data-input">
-            <el-input v-model.trim="response.csr_key" type="textarea" rows="8" placeholder="私钥" />
+            <el-input v-model.trim="response.csr_key" type="textarea" rows="8" placeholder="cer证书" />
           </div>                 
         </div>
 
@@ -44,7 +44,7 @@
             </el-button>   
           </div>
           <div class="sign-data-input">
-            <el-input v-model.trim="response.pfx_key" type="text" placeholder="私钥" />
+            <el-input v-model.trim="response.pfx_key" type="text" placeholder="pfx证书" />
           </div>                 
         </div>
 
