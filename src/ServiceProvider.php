@@ -98,6 +98,7 @@ class ServiceProvider extends BaseServiceProvider
         
         Artisan::call('vendor:publish', [
             '--tag' => 'larke-admin-sign-cert-assets',
+            '--force' => true,
         ]);
     }
     
