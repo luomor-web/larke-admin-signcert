@@ -41,7 +41,7 @@ class ServiceProvider extends BaseServiceProvider
      */
     public $icon = __DIR__ . '/../icon.png';
     
-    protected $slug = '';
+    protected $slug = 'larke-admin.extension.sign-cert';
     
     /**
      * 初始化
@@ -50,8 +50,6 @@ class ServiceProvider extends BaseServiceProvider
     {
         // 扩展注册
         Extension::extend($this->info['name'], __CLASS__);
-        
-        $this->slug = 'larke-admin.extension.sign-cert';
     }
     
     /**
