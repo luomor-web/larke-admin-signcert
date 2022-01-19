@@ -59,6 +59,7 @@ class Rsa extends BaseController
         $passphrase = $request->input('pass', null);
         
         $rsa = new CryptRSA();
+        $rsa->setEncryptionMode(CryptRSA::ENCRYPTION_PKCS1);
         $keys = $rsa->createKey((int) $len);
         
         $privkey = $keys['privatekey']; // 私钥
@@ -104,6 +105,7 @@ class Rsa extends BaseController
         $passphrase = $request->input('pass', null);
         
         $rsa = new CryptRSA();
+        $rsa->setEncryptionMode(CryptRSA::ENCRYPTION_PKCS1);
         $keys = $rsa->createKey((int) $len);
         
         $privkey = $keys['privatekey']; // 私钥
