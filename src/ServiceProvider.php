@@ -5,16 +5,16 @@ declare (strict_types = 1);
 namespace Larke\Admin\SignCert;
 
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Event;
 
-use Larke\Admin\Event as AdminEvent;
-use Larke\Admin\Facade\Extension;
 use Larke\Admin\Extension\Rule;
 use Larke\Admin\Extension\ServiceProvider as BaseServiceProvider;
 use Larke\Admin\Frontend\Support\Menu;
 
 class ServiceProvider extends BaseServiceProvider
 {
+    /**
+     * 扩展信息
+     */
     public $info = [
         'name' => 'larke/sign-cert',
         'title' => '签名证书',
@@ -34,8 +34,7 @@ class ServiceProvider extends BaseServiceProvider
             ],
         ],
         'version' => '1.1.0',
-        'adaptation' => '1.1.*',
-        'require' => [],
+        'adaptation' => '1.2.*',
     ];
     
     /**
@@ -51,7 +50,14 @@ class ServiceProvider extends BaseServiceProvider
     public function boot()
     {
         // 扩展注册
-        Extension::extend($this->info['name'], __CLASS__);
+        $this->withExtension(
+            $this->info['name'], 
+            $this->withExtensionInfo(
+                __CLASS__, 
+                $this->info, 
+                $this->icon
+            )
+        );
         
         // 事件
         $this->bootListeners();
@@ -74,8 +80,13 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function exceptSlugs()
     {
-        larke_admin_authenticate_excepts(['larke-admin.sign-cert.cert-download']);
-        larke_admin_permission_excepts(['larke-admin.sign-cert.cert-download']);
+        $this->withAuthenticateExcepts([
+            'larke-admin.sign-cert.cert-download',
+        ]);
+        
+        $this->withPermissionExcepts([
+            'larke-admin.sign-cert.cert-download',
+        ]);
     }
     
     /**
@@ -84,7 +95,7 @@ class ServiceProvider extends BaseServiceProvider
     protected function registerNamespaces()
     {
         if (! class_exists('phpseclib\\Crypt\\RSA')) {
-            Extension::namespaces([
+            $this->withNamespace([
                 'phpseclib\\' => __DIR__ . '/../lib/phpseclib',
             ]);
         }
@@ -113,51 +124,35 @@ class ServiceProvider extends BaseServiceProvider
         $thiz = $this;
         
         // 安装后
-        Event::listen(function (AdminEvent\ExtensionInstall $event) use($thiz) {
-            $name = $event->name;
-            $info = $event->info;
-            
+        $this->onInatll(function ($name, $info) use($thiz) {
             if ($name == $thiz->info["name"]) {
                 $thiz->install();
             }
         });
         
         // 卸载后
-        Event::listen(function (AdminEvent\ExtensionUninstall $event) use($thiz) {
-            $name = $event->name;
-            $info = $event->info;
-            
+        $this->onUninstall(function ($name, $info) use($thiz) {
             if ($name == $thiz->info["name"]) {
                 $thiz->uninstall();
             }
         });
         
         // 更新后
-        Event::listen(function (AdminEvent\ExtensionUpgrade $event) use($thiz) {
-            $name = $event->name;
-            $oldInfo = $event->oldInfo;
-            $newInfo = $event->newInfo;
-            
+        $this->onUpgrade(function ($name, $oldInfo, $newInfo) use($thiz) {
             if ($name == $thiz->info["name"]) {
                 $thiz->upgrade();
             }
         });
         
         // 启用后
-        Event::listen(function (AdminEvent\ExtensionEnable $event) use($thiz) {
-            $name = $event->name;
-            $info = $event->info;
-            
+        $this->onEnable(function ($name, $info) use($thiz) {
             if ($name == $thiz->info["name"]) {
                 $thiz->enable();
             }
         });
         
         // 禁用后
-        Event::listen(function (AdminEvent\ExtensionDisable $event) use($thiz) {
-            $name = $event->name;
-            $info = $event->info;
-            
+        $this->onDisable(function ($name, $info) use($thiz) {
             if ($name == $thiz->info["name"]) {
                 $thiz->disable();
             }
