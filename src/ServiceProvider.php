@@ -33,8 +33,8 @@ class ServiceProvider extends BaseServiceProvider
                 'homepage' => 'https://github.com/deatil', 
             ],
         ],
-        'version' => '1.1.0',
-        'adaptation' => '1.2.*',
+        'version' => '1.3.0',
+        'adaptation' => '^1.3',
     ];
     
     /**
@@ -42,7 +42,7 @@ class ServiceProvider extends BaseServiceProvider
      */
     public $icon = __DIR__ . '/../icon.png';
     
-    protected $slug = 'larke-admin.extension.sign-cert';
+    protected $slug = 'larke-admin.ext.sign-cert';
     
     /**
      * 初始化
