@@ -24,7 +24,7 @@ class RsaPfx extends BaseController
      * @desc Rsa的pfx创建
      * @order 1701
      * @auth true
-     * @parent larke-admin.extension.sign-cert
+     * @parent larke-admin.ext.sign-cert
      *
      * @param  Request  $request
      * @return Response

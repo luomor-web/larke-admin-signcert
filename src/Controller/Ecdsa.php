@@ -24,7 +24,7 @@ class Ecdsa extends BaseController
      * @desc Ecdsa证书创建
      * @order 1501
      * @auth true
-     * @parent larke-admin.extension.sign-cert
+     * @parent larke-admin.ext.sign-cert
      *
      * @param  Request  $request
      * @return Response

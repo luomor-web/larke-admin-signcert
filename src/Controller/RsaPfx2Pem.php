@@ -25,7 +25,7 @@ class RsaPfx2Pem extends BaseController
      * @desc RsaPfx格式转pem格式证书
      * @order 1801
      * @auth true
-     * @parent larke-admin.extension.sign-cert
+     * @parent larke-admin.ext.sign-cert
      *
      * @param  Request  $request
      * @return Response

@@ -23,7 +23,7 @@ class Hmac extends BaseController
      * @desc Hmac证书创建
      * @order 1201
      * @auth true
-     * @parent larke-admin.extension.sign-cert
+     * @parent larke-admin.ext.sign-cert
      *
      * @param  Request  $request
      * @return Response

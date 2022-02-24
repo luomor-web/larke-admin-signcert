@@ -13,7 +13,13 @@ use Larke\Admin\Http\Controller as BaseController;
 /**
  * 证书
  *
- * @create 2020-12-25
+ * @title 签名证书
+ * @desc 用于签名所需要的证书生成
+ * @order 1700
+ * @auth true
+ * @slug larke-admin.ext.sign-cert
+ *
+ * @create 2022-2-25
  * @author deatil
  */
 class Cert extends BaseController
@@ -25,7 +31,7 @@ class Cert extends BaseController
      * @desc 证书文件下载
      * @order 1701
      * @auth false
-     * @parent larke-admin.extension.sign-cert
+     * @parent larke-admin.ext.sign-cert
      *
      * @param string $code
      * @return Response

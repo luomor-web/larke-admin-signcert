@@ -25,7 +25,7 @@ class Rsa extends BaseController
      * @desc Rsa证书创建
      * @order 1301
      * @auth true
-     * @parent larke-admin.extension.sign-cert
+     * @parent larke-admin.ext.sign-cert
      *
      * @param  Request  $request
      * @return Response

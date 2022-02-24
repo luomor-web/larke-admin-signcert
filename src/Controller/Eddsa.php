@@ -25,7 +25,7 @@ class Eddsa extends BaseController
      * @desc Eddsa证书创建
      * @order 1601
      * @auth true
-     * @parent larke-admin.extension.sign-cert
+     * @parent larke-admin.ext.sign-cert
      *
      * @param  Request  $request
      * @return Response
