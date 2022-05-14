@@ -34,7 +34,7 @@ class ServiceProvider extends BaseServiceProvider
             ],
         ],
         'version' => '1.3.0',
-        'adaptation' => '^1.3',
+        'adaptation' => '>=1.3.5',
     ];
     
     /**
