@@ -8,6 +8,7 @@ use phpseclib\Crypt\RSA as CryptRSA;
 
 use Illuminate\Http\Request;
 
+use Larke\Admin\Annotation\RouteRule;
 use Larke\Admin\Http\Controller as BaseController;
 
 /**
@@ -21,15 +22,16 @@ class Rsa extends BaseController
     /**
      * Rsa创建
      *
-     * @title Rsa创建
-     * @desc Rsa证书创建
-     * @order 1301
-     * @auth true
-     * @parent larke-admin.ext.sign-cert
-     *
      * @param  Request  $request
      * @return Response
      */
+    #[RouteRule(
+        title:  "Rsa创建", 
+        desc:   "Rsa证书创建",
+        order:  1301,
+        parent: "larke-admin.ext.sign-cert",
+        auth:   true
+    )]
     public function create(Request $request)
     {
         $ktype = $request->input('ktype', 'pkcs8');

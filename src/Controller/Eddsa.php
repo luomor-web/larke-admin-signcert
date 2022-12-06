@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Response;
 
+use Larke\Admin\Annotation\RouteRule;
 use Larke\Admin\Http\Controller as BaseController;
 
 /**
@@ -21,15 +22,16 @@ class Eddsa extends BaseController
     /**
      * Eddsa创建
      *
-     * @title Eddsa创建
-     * @desc Eddsa证书创建
-     * @order 1601
-     * @auth true
-     * @parent larke-admin.ext.sign-cert
-     *
      * @param  Request  $request
      * @return Response
      */
+    #[RouteRule(
+        title:  "Eddsa创建", 
+        desc:   "Eddsa证书创建",
+        order:  1601,
+        parent: "larke-admin.ext.sign-cert",
+        auth:   true
+    )]
     public function create(Request $request)
     {
         if (! extension_loaded('sodium')) {

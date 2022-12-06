@@ -6,6 +6,7 @@ namespace Larke\Admin\SignCert\Controller;
 
 use Illuminate\Http\Request;
 
+use Larke\Admin\Annotation\RouteRule;
 use Larke\Admin\Http\Controller as BaseController;
 
 /**
@@ -18,16 +19,16 @@ class Hmac extends BaseController
 {
     /**
      * Hmac创建
-     *
-     * @title Hmac创建
-     * @desc Hmac证书创建
-     * @order 1201
-     * @auth true
-     * @parent larke-admin.ext.sign-cert
-     *
      * @param  Request  $request
      * @return Response
      */
+    #[RouteRule(
+        title:  "Hmac创建", 
+        desc:   "Hmac证书创建",
+        order:  1201,
+        parent: "larke-admin.ext.sign-cert",
+        auth:   true
+    )]
     public function create(Request $request)
     {
         $types = ['sha256', 'sha384', 'sha512'];

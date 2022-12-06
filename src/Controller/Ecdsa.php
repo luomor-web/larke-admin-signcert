@@ -7,6 +7,7 @@ namespace Larke\Admin\SignCert\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
+use Larke\Admin\Annotation\RouteRule;
 use Larke\Admin\Http\Controller as BaseController;
 
 /**
@@ -20,15 +21,16 @@ class Ecdsa extends BaseController
     /**
      * Ecdsa创建
      *
-     * @title Ecdsa创建
-     * @desc Ecdsa证书创建
-     * @order 1501
-     * @auth true
-     * @parent larke-admin.ext.sign-cert
-     *
      * @param  Request  $request
      * @return Response
      */
+    #[RouteRule(
+        title:  "Ecdsa创建", 
+        desc:   "Ecdsa证书创建",
+        order:  1501,
+        parent: "larke-admin.ext.sign-cert",
+        auth:   true
+    )]
     public function create(Request $request)
     {
         $lens = ['384', '512', '1024', '2048', '4096'];

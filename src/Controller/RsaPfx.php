@@ -7,6 +7,7 @@ namespace Larke\Admin\SignCert\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
+use Larke\Admin\Annotation\RouteRule;
 use Larke\Admin\Http\Controller as BaseController;
 
 /**
@@ -20,15 +21,16 @@ class RsaPfx extends BaseController
     /**
      * pfx创建
      *
-     * @title Rsa的pfx创建
-     * @desc Rsa的pfx创建
-     * @order 1701
-     * @auth true
-     * @parent larke-admin.ext.sign-cert
-     *
      * @param  Request  $request
      * @return Response
      */
+    #[RouteRule(
+        title:  "Rsa的pfx创建", 
+        desc:   "Rsa的pfx创建",
+        order:  1701,
+        parent: "larke-admin.ext.sign-cert",
+        auth:   true
+    )]
     public function create(Request $request)
     {
         $lens = ['384', '512', '1024', '2048', '4096'];
