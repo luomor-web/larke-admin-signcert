@@ -29,12 +29,12 @@
                             eddsa_private_key.pem
                         </el-tag>
                     </span>
-                    <el-button v-waves size="mini" @click="handleDownload(response.private_key, $event)">
-                        下载私钥
-                    </el-button>                    
+                    <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.private_key, $event)">
+                        复制
+                    </el-button>                      
                 </div>
                 <div class="sign-data-input">
-                    <el-input v-model.trim="response.private_key" type="text" placeholder="私钥ID" />
+                    <el-input v-model.trim="response.private_key" type="textarea" rows="6" placeholder="私钥ID" />
                 </div>                  
             </div>
 
@@ -46,12 +46,12 @@
                             eddsa_public_key.pem
                         </el-tag>   
                     </span>
-                    <el-button v-waves size="mini" @click="handleDownload(response.public_key, $event)">
-                        下载公钥
-                    </el-button>                        
+                    <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.public_key, $event)">
+                        复制
+                    </el-button>                      
                 </div>
                 <div class="sign-data-input">
-                    <el-input v-model.trim="response.public_key" type="text" placeholder="公钥ID" />
+                    <el-input v-model.trim="response.public_key" type="textarea" rows="6" placeholder="公钥ID" />
                 </div>                
             </div>
        </div>
@@ -93,7 +93,7 @@ export default {
         clipboard(text, event)
         this.successTip('复制成功')
     },  
-    handleDownload(code) {
+    handleDownload(code, event) {
       if (code == '') {
         this.$message({
           message: '请选择要下载的证书',
@@ -111,8 +111,8 @@ export default {
         this.response.public_key = ''
         
         eddsa(this.setting).then(response => {
-            this.response.private_key = (response.data.private_key)
-            this.response.public_key = (response.data.public_key)
+            this.response.private_key = response.data.private_key
+            this.response.public_key = response.data.public_key
 
             this.successTip('创建成功')
         })

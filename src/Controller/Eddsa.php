@@ -38,20 +38,20 @@ class Eddsa extends BaseController
             return $this->error(__('sodium 扩展不存在'));
         }
         
-        $signPair = sodium_crypto_sign_keypair();
-        $signSecret = sodium_crypto_sign_secretkey($signPair);
-        $signPublic = sodium_crypto_sign_publickey($signPair);
+        $keypair = sodium_crypto_sign_keypair();
+        $secretkey = sodium_crypto_sign_secretkey($keypair);
+        $public = sodium_crypto_sign_publickey($keypair);
         
-        $signId = md5(microtime().mt_rand(10000, 99999));
-        $privateId = $signId.'_eddsa_private_key.pem';
-        $publicId = $signId.'_eddsa_public_key.pem';
-        
-        Cache::put($privateId, $signSecret, 3000);
-        Cache::put($publicId, $signPublic, 3000);
+        $privateKey = "-----BEGIN PRIVATE KEY-----\r\n" .
+                         chunk_split(base64_encode($secretkey), 64) .
+                         '-----END PRIVATE KEY-----';
+        $publicKey = "-----BEGIN PUBLIC KEY-----\r\n" .
+                        chunk_split(base64_encode($public), 64) .
+                        '-----END PUBLIC KEY-----';
         
         $data = [
-            'private_key' => $privateId,
-            'public_key' => $publicId,
+            'private_key' => $privateKey,
+            'public_key'  => $publicKey,
         ];
         
         return $this->success(__('创建成功'), $data);
