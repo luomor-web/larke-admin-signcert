@@ -33,26 +33,22 @@ class Ecdsa extends BaseController
     )]
     public function create(Request $request)
     {
-        // 方式
-        $types = ['p256', 'p384'];
         $type = $request->input('type');
-        if (! in_array($type, $types)) {
-            $type = 'p256';
-        }
+        $cipher = $request->input('cipher');
+        // 密码
+        $privkeypass = $request->input('pass', null);
 
+        // 方式
         $curveNames = [
             'p256' => 'prime256v1', 
             'p384' => 'secp384r1',
         ];
+        if (! array_key_exists($type, $curveNames)) {
+            $type = 'p256';
+        }
         $curveName = $curveNames[$type];
 
         // 加密 cipher
-        $ciphers = ['RC2_40', 'RC2_64', 'RC2_128', 'DES', '3DES', 'AES_128_CBC', 'AES_192_CBC', 'AES_256_CBC'];
-        $cipher = $request->input('cipher');
-        if (! in_array($cipher, $ciphers)) {
-            $cipher = '3DES';
-        }
-
         $encryptCiphers = [
             'RC2_40'      => OPENSSL_CIPHER_RC2_40,
             'RC2_64'      => OPENSSL_CIPHER_RC2_64,
@@ -63,11 +59,11 @@ class Ecdsa extends BaseController
             'AES_192_CBC' => OPENSSL_CIPHER_AES_192_CBC,
             'AES_256_CBC' => OPENSSL_CIPHER_AES_256_CBC,
         ];
+        if (! array_key_exists($cipher, $encryptCiphers)) {
+            $cipher = '3DES';
+        }
         $encryptCipher = $encryptCiphers[$cipher];
         
-        // 密码
-        $privkeypass = $request->input('pass', null);
-
         $privkey = ""; // 私钥
         $pubkey = ""; // 公钥
         
