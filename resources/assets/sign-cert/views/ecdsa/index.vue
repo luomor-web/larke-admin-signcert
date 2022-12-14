@@ -8,21 +8,25 @@
       <el-alert
           type="warning"
           title="注意事项"
-          description="生成 ecdsa 证书需要 php 开启 openssl 扩展"
+          description="生成 ecdsa 证书需要 php 开启 openssl 扩展。两个曲线是 prime256v1(NIST P-256) 和 secp384r1(NIST P-384)"
           style="margin-bottom:15px;"
           show-icon
           :closable="false"
       />        
 
       <div class="filter-container">
-          <el-select v-model="setting.len" placeholder="秘钥长度" class="filter-item" style="width: 130px;margin-right: 10px;">
-              <el-option v-for="len in lenOptions" :key="len.key" :label="len.display_name" :value="len.key" />
+          <el-select v-model="setting.type" placeholder="秘钥长度" class="filter-item" style="width: 130px;margin-right: 10px;">
+              <el-option v-for="type in typeOptions" :key="type.key" :label="type.display_name" :value="type.key" />
+          </el-select>
+
+          <el-select v-model="setting.cipher" placeholder="加密类型" class="filter-item" style="width: 130px;margin-right: 10px;">
+              <el-option v-for="cipher in cipherOptions" :key="cipher.key" :label="cipher.display_name" :value="cipher.key" />
           </el-select>
 
           <el-input v-model="setting.pass" placeholder="秘钥密码，可不填" clearable style="width: 200px;margin-right: 10px;" class="filter-item" />
 
           <el-button v-waves class="filter-item" type="primary" @click="submit">
-            创建证书
+            生成证书
           </el-button>
       </div>
 
@@ -77,19 +81,27 @@ export default {
   data() {
     return {
       setting: {
-        len: '2048',
+        type: 'p256',
+        cipher: '3DES',
         pass: '',   
       },
       response: {
           private_key: '',
           public_key: '',
       },
-      lenOptions: [
-        { key: '384', display_name: '384' },
-        { key: '512', display_name: '512' },
-        { key: '1024', display_name: '1024' },
-        { key: '2048', display_name: '2048' },
-        { key: '4096', display_name: '4096' },
+      typeOptions: [
+        { key: 'p256', display_name: 'P-256' },
+        { key: 'p384', display_name: 'P-384' },
+      ],  
+      cipherOptions: [
+        { key: 'RC2_40', display_name: 'RC2_40' },
+        { key: 'RC2_64', display_name: 'RC2_64' },
+        { key: 'RC2_128', display_name: 'RC2_128' },
+        { key: 'DES', display_name: 'DES' },
+        { key: '3DES', display_name: '3DES' },
+        { key: 'AES_128_CBC', display_name: 'AES_128_CBC' },
+        { key: 'AES_192_CBC', display_name: 'AES_192_CBC' },
+        { key: 'AES_256_CBC', display_name: 'AES_256_CBC' },
       ],  
     }
   },

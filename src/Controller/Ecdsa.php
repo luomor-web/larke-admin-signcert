@@ -33,12 +33,39 @@ class Ecdsa extends BaseController
     )]
     public function create(Request $request)
     {
-        $lens = ['384', '512', '1024', '2048', '4096'];
-        $len = $request->input('len');
-        if (! in_array($len, $lens)) {
-            $len = '2048';
+        // 方式
+        $types = ['p256', 'p384'];
+        $type = $request->input('type');
+        if (! in_array($type, $types)) {
+            $type = 'p256';
         }
+
+        $curveNames = [
+            'p256' => 'prime256v1', 
+            'p384' => 'secp384r1',
+        ];
+        $curveName = $curveNames[$type];
+
+        // 加密 cipher
+        $ciphers = ['RC2_40', 'RC2_64', 'RC2_128', 'DES', '3DES', 'AES_128_CBC', 'AES_192_CBC', 'AES_256_CBC'];
+        $cipher = $request->input('cipher');
+        if (! in_array($cipher, $ciphers)) {
+            $cipher = '3DES';
+        }
+
+        $encryptCiphers = [
+            'RC2_40'      => OPENSSL_CIPHER_RC2_40,
+            'RC2_64'      => OPENSSL_CIPHER_RC2_64,
+            'RC2_128'     => OPENSSL_CIPHER_RC2_128,
+            'DES'         => OPENSSL_CIPHER_DES,
+            '3DES'        => OPENSSL_CIPHER_3DES,
+            'AES_128_CBC' => OPENSSL_CIPHER_AES_128_CBC,
+            'AES_192_CBC' => OPENSSL_CIPHER_AES_192_CBC,
+            'AES_256_CBC' => OPENSSL_CIPHER_AES_256_CBC,
+        ];
+        $encryptCipher = $encryptCiphers[$cipher];
         
+        // 密码
         $privkeypass = $request->input('pass', null);
 
         $privkey = ""; // 私钥
@@ -47,10 +74,10 @@ class Ecdsa extends BaseController
         $opensslConfigPath = __DIR__ . "/../../resources/ssl/openssl.cnf";
         
         $config = [
-            "private_key_bits" => $len, 
-            "private_key_type" => OPENSSL_KEYTYPE_EC, 
-            "curve_name" => "secp256k1", 
-            "config" => $opensslConfigPath,
+            "encrypt_key_cipher" => $encryptCipher,
+            "private_key_type"   => OPENSSL_KEYTYPE_EC, 
+            "curve_name"         => $curveName, 
+            "config"             => $opensslConfigPath,
         ];
         
         // 生成证书

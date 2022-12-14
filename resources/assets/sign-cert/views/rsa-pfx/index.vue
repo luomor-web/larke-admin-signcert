@@ -13,7 +13,7 @@
         <el-input v-model="setting.pass" placeholder="秘钥密码" clearable style="width: 200px;margin-right: 10px;" class="filter-item" />
 
         <el-button v-waves class="filter-item" type="primary" @click="submit">
-          创建证书
+          生成证书
         </el-button>
       </div>
 
@@ -22,9 +22,9 @@
           <div class="sign-data-tip">
             证书 
             <el-tag type="success" size="mini">
-              rsa_key.cer
+              rsa_key_cer.pem
             </el-tag>
-            <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.private_key, $event)">
+            <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.csr_key, $event)">
               复制
             </el-button>
           </div>

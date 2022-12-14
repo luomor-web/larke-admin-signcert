@@ -16,7 +16,7 @@
 
         <div class="filter-container">
             <el-button v-waves class="filter-item" type="primary" @click="submit">
-                创建证书
+                生成证书
             </el-button>
         </div>
 

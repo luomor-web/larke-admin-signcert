@@ -66,6 +66,10 @@ class RsaPfx2Pem extends BaseController
         
         // 获取公钥
         $pubInfo = openssl_pkey_get_public($cerKey);
+        if ($pubInfo === false) {
+            return $this->error(__('cer证书内容错误'));
+        }
+        
         $pubData = openssl_pkey_get_details($pubInfo);
         if (! empty($pubData['key'])) {
             $pubkey = $pubData['key'];

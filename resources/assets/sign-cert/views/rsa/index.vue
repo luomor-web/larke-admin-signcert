@@ -26,7 +26,7 @@
         <el-input v-model="setting.pass" placeholder="秘钥密码，可不填" clearable style="width: 200px;margin-right: 10px;" class="filter-item" />
 
         <el-button v-waves class="filter-item" type="primary" @click="submit">
-          创建证书
+          生成证书
         </el-button>
       </div>
 
@@ -90,7 +90,6 @@ export default {
         public_key: '',
       },
       lenOptions: [
-        { key: '384', display_name: '384' },
         { key: '512', display_name: '512' },
         { key: '1024', display_name: '1024' },
         { key: '2048', display_name: '2048' },

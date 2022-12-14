@@ -52,7 +52,8 @@ class Rsa extends BaseController
      */
     protected function pkcs1(Request $request)
     {
-        $lens = ['384', '512', '1024', '2048', '4096'];
+        // $lens = ['384', '512', '1024', '2048', '4096'];
+        $lens = ['512', '1024', '2048', '4096'];
         $len = $request->input('len');
         if (! in_array($len, $lens)) {
             $len = '2048';
@@ -98,7 +99,8 @@ class Rsa extends BaseController
      */
     protected function pkcs8(Request $request)
     {
-        $lens = ['384', '512', '1024', '2048', '4096'];
+        // $lens = ['384', '512', '1024', '2048', '4096'];
+        $lens = ['512', '1024', '2048', '4096'];
         $len = $request->input('len');
         if (! in_array($len, $lens)) {
             $len = '2048';
