@@ -33,6 +33,27 @@
         }
     },
     "extra" : {
+        "larke": {
+            "title": "签名证书",
+            "description": "生成RSA,EDDSA,ECDSA等非对称签名证书",
+            "keywords": [
+                "rsa",
+                "ecdsa",
+                "eddsa",
+                "SignCert"
+            ],
+            "homepage": "https://github.com/deatil/larke-admin-signcert",
+            "authors": [
+                {
+                    "name": "deatil",
+                    "email": "deatil@github.com",
+                    "homepage": "https://github.com/deatil"
+                }
+            ],
+            "version": "1.5.0",
+            "adaptation": ">=1.7.0",
+            "require": {}
+        },
         "laravel" : {
             "providers" : [
                 "Larke\\Admin\\SignCert\\ServiceProvider"
