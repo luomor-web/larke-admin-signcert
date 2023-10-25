@@ -45,7 +45,7 @@ class Rsa extends BaseController
     }
     
     /**
-     * Rsa创建 pkcs1格式
+     * Rsa创建 PKCS1 格式
      *
      * @param  Request  $request
      * @return Response
@@ -66,7 +66,7 @@ class Rsa extends BaseController
         $keys = $rsa->createKey((int) $len);
         
         $privkey = $keys['privatekey']; // 私钥
-        $pubkey = $keys['publickey']; // 公钥
+        $pubkey  = $keys['publickey']; // 公钥
         
         $rsa->loadKey($privkey);
         if (! empty($passphrase)) {
@@ -74,7 +74,7 @@ class Rsa extends BaseController
         }
         
         $newPrivkey = $rsa->getPrivateKey(CryptRSA::PRIVATE_FORMAT_PKCS1);
-        $newPubkey = $rsa->getPublicKey(CryptRSA::PUBLIC_FORMAT_PKCS1);
+        $newPubkey  = $rsa->getPublicKey(CryptRSA::PUBLIC_FORMAT_PKCS1);
         
         if ($newPrivkey === false) {
             $newPrivkey = '';
@@ -85,14 +85,14 @@ class Rsa extends BaseController
         
         $data = [
             'private_key' => $newPrivkey,
-            'public_key' => $newPubkey,
+            'public_key'  => $newPubkey,
         ];
         
         return $data;
     }
     
     /**
-     * Rsa创建 pkcs8格式
+     * Rsa创建 PKCS8 格式
      *
      * @param  Request  $request
      * @return Response
@@ -113,7 +113,7 @@ class Rsa extends BaseController
         $keys = $rsa->createKey((int) $len);
         
         $privkey = $keys['privatekey']; // 私钥
-        $pubkey = $keys['publickey']; // 公钥
+        $pubkey  = $keys['publickey']; // 公钥
         
         $rsa->loadKey($privkey);
         if (! empty($passphrase)) {
@@ -121,7 +121,7 @@ class Rsa extends BaseController
         }
         
         $newPrivkey = $rsa->getPrivateKey(CryptRSA::PRIVATE_FORMAT_PKCS8);
-        $newPubkey = $rsa->getPublicKey(CryptRSA::PUBLIC_FORMAT_PKCS8);
+        $newPubkey  = $rsa->getPublicKey(CryptRSA::PUBLIC_FORMAT_PKCS8);
         
         if ($newPrivkey === false) {
             $newPrivkey = '';
@@ -132,7 +132,7 @@ class Rsa extends BaseController
         
         $data = [
             'private_key' => $newPrivkey,
-            'public_key' => $newPubkey,
+            'public_key'  => $newPubkey,
         ];
         
         return $data;

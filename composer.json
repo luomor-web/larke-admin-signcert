@@ -50,7 +50,7 @@
                     "homepage": "https://github.com/deatil"
                 }
             ],
-            "version": "1.5.0",
+            "version": "1.5.1",
             "adaptation": ">=1.7.0",
             "require": {}
         },

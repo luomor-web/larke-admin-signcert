@@ -87,7 +87,7 @@ class Ecdsa extends BaseController
         
         $data = [
             'private_key' => $privkey,
-            'public_key' => $pubkey,
+            'public_key'  => $pubkey,
         ];
         
         return $this->success(__('创建成功'), $data);

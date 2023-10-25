@@ -3,10 +3,10 @@ export default {
     SignCert: 'SignCert',
 
     SignCertHmac: 'SignCert Hmac',
-    SignCertRsa: 'SignCert Rsa',
-    SignCertRsaPfx: 'SignCert RsaPfx',
-    SignCertRsaPfxPem: 'SignCert RsaPfxPem',
-    SignCertEcdsa: 'SignCert Ecdsa',
-    SignCertEddsa: 'SignCert Eddsa',
+    SignCertRsa: 'SignCert RSA',
+    SignCertRsaPfx: 'SignCert RSAPfx',
+    SignCertRsaPfxPem: 'SignCert RSAPfxPem',
+    SignCertEcdsa: 'SignCert ECDSA',
+    SignCertEddsa: 'SignCert EdDSA',
   },
 }

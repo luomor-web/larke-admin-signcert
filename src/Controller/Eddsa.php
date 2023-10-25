@@ -38,16 +38,12 @@ class Eddsa extends BaseController
             return $this->error(__('sodium 扩展不存在'));
         }
         
-        $keypair = sodium_crypto_sign_keypair();
+        $keypair   = sodium_crypto_sign_keypair();
         $secretkey = sodium_crypto_sign_secretkey($keypair);
-        $public = sodium_crypto_sign_publickey($keypair);
+        $public    = sodium_crypto_sign_publickey($keypair);
         
-        $privateKey = "-----BEGIN PRIVATE KEY-----\r\n" .
-                         chunk_split(base64_encode($secretkey), 64) .
-                         '-----END PRIVATE KEY-----';
-        $publicKey = "-----BEGIN PUBLIC KEY-----\r\n" .
-                        chunk_split(base64_encode($public), 64) .
-                        '-----END PUBLIC KEY-----';
+        $privateKey = bin2hex($secretkey);
+        $publicKey  = bin2hex($public);
         
         $data = [
             'private_key' => $privateKey,

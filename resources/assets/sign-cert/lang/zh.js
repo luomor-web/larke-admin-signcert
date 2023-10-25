@@ -3,10 +3,10 @@ export default {
     SignCert: '签名证书',
 
     SignCertHmac: 'Hmac加密',
-    SignCertRsa: 'Rsa证书',
-    SignCertRsaPfx: 'RsaPfx证书',
-    SignCertRsaPfxPem: 'RsaPfx2pem证书',
-    SignCertEcdsa: 'Ecdsa证书',
-    SignCertEddsa: 'Eddsa证书',
+    SignCertRsa: 'RSA证书',
+    SignCertRsaPfx: 'RSAPfx证书',
+    SignCertRsaPfxPem: 'RSAPfx2pem证书',
+    SignCertEcdsa: 'ECDSA证书',
+    SignCertEddsa: 'EdDSA证书',
   },
 }

@@ -2,13 +2,13 @@
   <div class="app-container">
     <el-card>
         <div slot="header" class="clearfix">
-            <span>Eddsa证书</span>
+            <span>EdDSA证书</span>
         </div>
 
         <el-alert
             type="warning"
             title="注意事项"
-            description="生成 eddsa 证书需要 php 开启 sodium 扩展"
+            description="生成 EdDSA 证书需要 php 开启 sodium 扩展"
             style="margin-bottom:15px;"
             show-icon
             :closable="false"
@@ -26,7 +26,7 @@
                     <span style="margin-right: 10px;">
                         私钥
                         <el-tag type="success" size="mini">
-                            eddsa_private_key.pem
+                            eddsa_private_key.hex
                         </el-tag>
                     </span>
                     <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.private_key, $event)">
@@ -34,7 +34,7 @@
                     </el-button>                      
                 </div>
                 <div class="sign-data-input">
-                    <el-input v-model.trim="response.private_key" type="textarea" rows="6" placeholder="私钥ID" />
+                    <el-input v-model.trim="response.private_key" type="textarea" rows="6" placeholder="私钥数据" />
                 </div>                  
             </div>
 
@@ -43,7 +43,7 @@
                     <span style="margin-right: 10px;">
                         公钥
                         <el-tag type="success" size="mini">
-                            eddsa_public_key.pem
+                            eddsa_public_key.hex
                         </el-tag>   
                     </span>
                     <el-button v-waves size="mini" style="margin-left:10px;" @click="handleClipboard(response.public_key, $event)">
@@ -51,7 +51,7 @@
                     </el-button>                      
                 </div>
                 <div class="sign-data-input">
-                    <el-input v-model.trim="response.public_key" type="textarea" rows="6" placeholder="公钥ID" />
+                    <el-input v-model.trim="response.public_key" type="textarea" rows="6" placeholder="公钥数据" />
                 </div>                
             </div>
        </div>

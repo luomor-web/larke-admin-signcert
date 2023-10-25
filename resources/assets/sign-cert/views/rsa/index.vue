@@ -2,13 +2,13 @@
   <div class="app-container">
     <el-card>
       <div slot="header" class="clearfix">
-          <span>Rsa证书</span>
+          <span>RSA证书</span>
       </div>
 
       <el-alert
           type="warning"
           title="注意事项"
-          description="生成 rsa 证书需要 php 开启 openssl 扩展"
+          description="生成 RSA 证书需要 php 开启 openssl 扩展"
           style="margin-bottom:15px;"
           show-icon
           :closable="false"

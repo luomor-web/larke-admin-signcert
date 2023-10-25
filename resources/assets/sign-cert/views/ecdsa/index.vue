@@ -2,13 +2,13 @@
   <div class="app-container">
     <el-card>
       <div slot="header" class="clearfix">
-          <span>Ecdsa证书</span>
+          <span>ECDSA证书</span>
       </div>
 
       <el-alert
           type="warning"
           title="注意事项"
-          description="生成 ecdsa 证书需要 php 开启 openssl 扩展。两个曲线是 prime256v1(NIST P-256) 和 secp384r1(NIST P-384)"
+          description="生成 ECDSA 证书需要 php 开启 openssl 扩展。两个曲线是 prime256v1(NIST P-256) 和 secp384r1(NIST P-384)"
           style="margin-bottom:15px;"
           show-icon
           :closable="false"
@@ -19,7 +19,7 @@
               <el-option v-for="type in typeOptions" :key="type.key" :label="type.display_name" :value="type.key" />
           </el-select>
 
-          <el-select v-model="setting.cipher" placeholder="加密类型" class="filter-item" style="width: 130px;margin-right: 10px;">
+          <el-select v-model="setting.cipher" placeholder="加密类型" class="filter-item" style="width: 150px;margin-right: 10px;">
               <el-option v-for="cipher in cipherOptions" :key="cipher.key" :label="cipher.display_name" :value="cipher.key" />
           </el-select>
 
