@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Response;
 
+use phpseclib3\Crypt\EC;
+
 use Larke\Admin\Annotation\RouteRule;
 use Larke\Admin\Http\Controller as BaseController;
 
@@ -34,20 +36,18 @@ class Eddsa extends BaseController
     )]
     public function create(Request $request)
     {
-        if (! extension_loaded('sodium')) {
-            return $this->error(__('sodium 扩展不存在'));
+        $passphrase = $request->input('pass', null);
+
+        $private = EC::createKey('ed25519');
+        $public = $private->getPublicKey();
+        
+        if (! empty($passphrase)) {
+            $private = $private->withPassword($passphrase);
         }
         
-        $keypair   = sodium_crypto_sign_keypair();
-        $secretkey = sodium_crypto_sign_secretkey($keypair);
-        $public    = sodium_crypto_sign_publickey($keypair);
-        
-        $privateKey = bin2hex($secretkey);
-        $publicKey  = bin2hex($public);
-        
         $data = [
-            'private_key' => $privateKey,
-            'public_key'  => $publicKey,
+            'private_key' => $private->toString('PKCS8'),
+            'public_key'  => $public->toString('PKCS8'),
         ];
         
         return $this->success(__('创建成功'), $data);

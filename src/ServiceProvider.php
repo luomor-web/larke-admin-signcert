@@ -33,7 +33,7 @@ class ServiceProvider extends BaseServiceProvider
     public function boot()
     {
         // 扩展注册
-        $this->withExtensionFromComposer(
+        $this->addExtension(
             __CLASS__, 
             $this->composer,
             $this->icon
@@ -60,11 +60,11 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function exceptSlugs()
     {
-        $this->withAuthenticateExcepts([
+        $this->addAuthenticateExcepts([
             'larke-admin.sign-cert.cert-download',
         ]);
         
-        $this->withPermissionExcepts([
+        $this->addPermissionExcepts([
             'larke-admin.sign-cert.cert-download',
         ]);
     }
@@ -75,7 +75,7 @@ class ServiceProvider extends BaseServiceProvider
     protected function registerNamespaces()
     {
         if (! class_exists('phpseclib\\Crypt\\RSA')) {
-            $this->withNamespace([
+            $this->registerNamespace([
                 'phpseclib\\' => __DIR__ . '/../lib/phpseclib',
             ]);
         }

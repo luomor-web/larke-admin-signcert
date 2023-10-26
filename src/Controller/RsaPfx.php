@@ -33,13 +33,14 @@ class RsaPfx extends BaseController
     )]
     public function create(Request $request)
     {
-        $lens = ['384', '512', '1024', '2048', '4096'];
-        $len = $request->input('len');
-        if (! in_array($len, $lens)) {
-            $len = '2048';
-        }
-        
+        $len = $request->input('len', 2048);
         $passphrase = $request->input('pass', null);
+        
+        $len = match($len) {
+            '384', '512', '1024', '2048', '4096' => (int) $len,
+            default => 2048,
+        };
+        
         if (empty($passphrase)) {
             return $this->error(__('秘钥密码不能为空'));
         }

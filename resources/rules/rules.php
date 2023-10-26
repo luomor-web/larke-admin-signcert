@@ -14,6 +14,13 @@ return [
             'slug' => 'larke-admin.sign-cert.hmac',
             'description' => 'hmac证书',
         ],
+        [
+            'title' => 'dsa证书',
+            'url' => 'sign-cert/dsa',
+            'method' => 'POST',
+            'slug' => 'larke-admin.sign-cert.dsa',
+            'description' => 'dsa证书',
+        ],
         
         [
             'title' => 'rsa证书',

@@ -31,11 +31,12 @@ class Hmac extends BaseController
     )]
     public function create(Request $request)
     {
-        $types = ['sha256', 'sha384', 'sha512'];
-        $type = $request->input('type');
-        if (! in_array($type, $types)) {
-            $type = 'sha256';
-        }
+        $type = $request->input('type', 'sha256');
+        
+        $type = match($type) {
+            'sha256', 'sha384', 'sha512' => $type,
+            default => 'sha256',
+        };
         
         $payload = $request->input('payload');
         if (empty($payload)) {

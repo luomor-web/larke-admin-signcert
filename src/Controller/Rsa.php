@@ -4,7 +4,7 @@ declare (strict_types = 1);
 
 namespace Larke\Admin\SignCert\Controller;
 
-use phpseclib\Crypt\RSA as CryptRSA;
+use phpseclib3\Crypt\RSA as CryptRSA;
 
 use Illuminate\Http\Request;
 
@@ -34,107 +34,33 @@ class Rsa extends BaseController
     )]
     public function create(Request $request)
     {
+        $len = $request->input('len', '2048');
         $ktype = $request->input('ktype', 'pkcs8');
-        if ($ktype == 'pkcs8') {
-            $data = $this->pkcs8($request);
-        } else {
-            $data = $this->pkcs1($request);
-        }
+        $passphrase = $request->input('pass', null);
+
+        $len = match($len) {
+            '384', '512', '1024', '2048', '4096' => (int) $len,
+            default => 2048,
+        };
         
+        $private = CryptRSA::createKey($len);
+        $public = $private->getPublicKey();
+        
+        if (! empty($passphrase)) {
+            $private = $private->withPassword($passphrase);
+        }
+
+        $type = match($ktype) {
+            'pkcs8' => 'PKCS8',
+            default => 'PKCS1',
+        };
+        
+        $data = [
+            'private_key' => $private->toString($type),
+            'public_key'  => $public->toString($type),
+        ];
+
         return $this->success(__('创建成功'), $data);
     }
     
-    /**
-     * Rsa创建 PKCS1 格式
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    protected function pkcs1(Request $request)
-    {
-        // $lens = ['384', '512', '1024', '2048', '4096'];
-        $lens = ['512', '1024', '2048', '4096'];
-        $len = $request->input('len');
-        if (! in_array($len, $lens)) {
-            $len = '2048';
-        }
-        
-        $passphrase = $request->input('pass', null);
-        
-        $rsa = new CryptRSA();
-        $rsa->setEncryptionMode(CryptRSA::ENCRYPTION_PKCS1);
-        $keys = $rsa->createKey((int) $len);
-        
-        $privkey = $keys['privatekey']; // 私钥
-        $pubkey  = $keys['publickey']; // 公钥
-        
-        $rsa->loadKey($privkey);
-        if (! empty($passphrase)) {
-            $rsa->setPassword($passphrase);
-        }
-        
-        $newPrivkey = $rsa->getPrivateKey(CryptRSA::PRIVATE_FORMAT_PKCS1);
-        $newPubkey  = $rsa->getPublicKey(CryptRSA::PUBLIC_FORMAT_PKCS1);
-        
-        if ($newPrivkey === false) {
-            $newPrivkey = '';
-        }
-        if ($newPubkey === false) {
-            $newPubkey = '';
-        }
-        
-        $data = [
-            'private_key' => $newPrivkey,
-            'public_key'  => $newPubkey,
-        ];
-        
-        return $data;
-    }
-    
-    /**
-     * Rsa创建 PKCS8 格式
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    protected function pkcs8(Request $request)
-    {
-        // $lens = ['384', '512', '1024', '2048', '4096'];
-        $lens = ['512', '1024', '2048', '4096'];
-        $len = $request->input('len');
-        if (! in_array($len, $lens)) {
-            $len = '2048';
-        }
-        
-        $passphrase = $request->input('pass', null);
-        
-        $rsa = new CryptRSA();
-        $rsa->setEncryptionMode(CryptRSA::ENCRYPTION_PKCS1);
-        $keys = $rsa->createKey((int) $len);
-        
-        $privkey = $keys['privatekey']; // 私钥
-        $pubkey  = $keys['publickey']; // 公钥
-        
-        $rsa->loadKey($privkey);
-        if (! empty($passphrase)) {
-            $rsa->setPassword($passphrase);
-        }
-        
-        $newPrivkey = $rsa->getPrivateKey(CryptRSA::PRIVATE_FORMAT_PKCS8);
-        $newPubkey  = $rsa->getPublicKey(CryptRSA::PUBLIC_FORMAT_PKCS8);
-        
-        if ($newPrivkey === false) {
-            $newPrivkey = '';
-        }
-        if ($newPubkey === false) {
-            $newPubkey = '';
-        }
-        
-        $data = [
-            'private_key' => $newPrivkey,
-            'public_key'  => $newPubkey,
-        ];
-        
-        return $data;
-    }
 }
