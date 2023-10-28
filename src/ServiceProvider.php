@@ -34,9 +34,9 @@ class ServiceProvider extends BaseServiceProvider
     {
         // 扩展注册
         $this->addExtension(
-            __CLASS__, 
-            $this->composer,
-            $this->icon
+            name:     __CLASS__, 
+            icon:     $this->icon,
+            composer: $this->composer,
         );
         
         // 事件
