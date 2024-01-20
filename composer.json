@@ -1,6 +1,6 @@
 {
     "name": "larke/sign-cert",
-    "description": "Make some rsa, eddsa, ecdsa keys base on larke-admin.",
+    "description": "Make some RSA, EdDSA, ECDSA, DSA keys base on larke-admin.",
     "keywords": [
         "lake",
         "larke",
@@ -35,7 +35,7 @@
     "extra" : {
         "larke": {
             "title": "签名证书",
-            "description": "生成RSA,EDDSA,ECDSA等非对称签名证书",
+            "description": "生成RSA,EdDSA,ECDSA,DSA等非对称签名证书",
             "keywords": [
                 "rsa",
                 "ecdsa",
@@ -50,7 +50,7 @@
                     "homepage": "https://github.com/deatil"
                 }
             ],
-            "version": "1.5.1",
+            "version": "1.5.2",
             "adaptation": ">=1.7.2",
             "require": {}
         },
