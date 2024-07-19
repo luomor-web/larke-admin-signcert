@@ -10,6 +10,12 @@ use Larke\Admin\Extension\Rule;
 use Larke\Admin\Extension\Menu;
 use Larke\Admin\Extension\ServiceProvider as BaseServiceProvider;
 
+use function Larke\Admin\register_install_hook;
+use function Larke\Admin\register_uninstall_hook;
+use function Larke\Admin\register_upgrade_hook;
+use function Larke\Admin\register_enable_hook;
+use function Larke\Admin\register_disable_hook;
+
 class ServiceProvider extends BaseServiceProvider
 {
     /**
@@ -23,9 +29,21 @@ class ServiceProvider extends BaseServiceProvider
     public $icon = __DIR__ . '/../icon.png';
     
     // 包名
-    protected $pkgName = "larke/sign-cert";
+    protected $pkg = "larke/sign-cert";
     
     protected $slug = 'larke-admin.ext.sign-cert';
+    
+    /**
+     * 在扩展安装、扩展卸载等操作时有效
+     */
+    public function action()
+    {
+        register_install_hook($this->pkg, [$this, 'install']);
+        register_uninstall_hook($this->pkg, [$this, 'uninstall']);
+        register_upgrade_hook($this->pkg, [$this, 'upgrade']);
+        register_enable_hook($this->pkg, [$this, 'enable']);
+        register_disable_hook($this->pkg, [$this, 'disable']);
+    }
     
     /**
      * 初始化
@@ -38,9 +56,6 @@ class ServiceProvider extends BaseServiceProvider
             icon:     $this->icon,
             composer: $this->composer,
         );
-        
-        // 事件
-        $this->bootListeners();
     }
     
     /**
@@ -95,50 +110,7 @@ class ServiceProvider extends BaseServiceProvider
             '--force' => true,
         ]);
     }
-    
-    /**
-     * 监听器
-     */
-    public function bootListeners()
-    {
-        $thiz = $this;
-        
-        // 安装后
-        $this->onInatll(function ($name, $info) use($thiz) {
-            if ($name == $thiz->pkgName) {
-                $thiz->install();
-            }
-        });
-        
-        // 卸载后
-        $this->onUninstall(function ($name, $info) use($thiz) {
-            if ($name == $thiz->pkgName) {
-                $thiz->uninstall();
-            }
-        });
-        
-        // 更新后
-        $this->onUpgrade(function ($name, $oldInfo, $newInfo) use($thiz) {
-            if ($name == $thiz->pkgName) {
-                $thiz->upgrade();
-            }
-        });
-        
-        // 启用后
-        $this->onEnable(function ($name, $info) use($thiz) {
-            if ($name == $thiz->pkgName) {
-                $thiz->enable();
-            }
-        });
-        
-        // 禁用后
-        $this->onDisable(function ($name, $info) use($thiz) {
-            if ($name == $thiz->pkgName) {
-                $thiz->disable();
-            }
-        });
-    }
-    
+
     /**
      * 安装后
      */
