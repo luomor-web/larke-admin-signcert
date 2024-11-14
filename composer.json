@@ -1,6 +1,6 @@
 {
-    "name": "larke/sign-cert",
-    "description": "Make some RSA, EdDSA, ECDSA, DSA keys base on larke-admin.",
+    "name": "luomor/larke-sign-cert",
+    "description": "Make some rsa, eddsa, ecdsa keys base on larke-admin.",
     "keywords": [
         "lake",
         "larke",
@@ -12,14 +12,14 @@
         "larke-admin",
         "larke-admin-signcert"
     ],
-    "homepage": "https://github.com/deatil/larke-admin-signcert",
+    "homepage": "https://github.com/luomor-web/larke-admin-signcert",
     "type": "library",
     "license": "Apache-2.0",
     "authors": [
         {
-            "name": "deatil",
-            "email": "deatil@github.com",
-            "homepage": "https://github.com/deatil",
+            "name": "Peter Zhang",
+            "email": "zhangchunsheng423@gmail.com",
+            "homepage": "https://github.com/zhangchunsheng",
             "role": "Developer"
         }
     ],
