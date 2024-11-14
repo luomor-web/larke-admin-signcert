@@ -25,7 +25,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "lake/larke-admin":"^2.0"
+        "luomor/larke-admin":"^1.4"
     },
     "autoload": {
         "psr-4": {
